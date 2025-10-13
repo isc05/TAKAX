@@ -1,0 +1,2 @@
+icon -> íconos y logos
+img -> imágenes de fondo, auxiliares, estéticas, etc.
