@@ -3,6 +3,10 @@ if(!user){
     window.location.href = '../login.html';
 }
 
+const greetingElement = document.querySelector(`#greeting`);
+
+greetingElement.textContent = `Bienvenido, ${user.name}`;
+
 const logout = document.querySelector('#logout')
 
 logout.addEventListener('click', ()=>{
