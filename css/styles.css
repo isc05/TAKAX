@@ -16,6 +16,10 @@ body{
 }
 
 section{
+    background: url(../img/background-01.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     display:flex;
     flex-wrap: wrap;
     height: 100vh;
@@ -26,9 +30,15 @@ section{
 }
 
 section h1{
-    font-size: 3em;
+    font-size: 7em;
+    
 }
 
+section img {
+    width: 12%; 
+    border-radius: 50%;
+    background-color: #e9e5e5;
+}
 section h2{
     text-align: center;
     width: 100%;
@@ -37,6 +47,7 @@ section h2{
 }
 
 section form{
+    background-color: #c4c4c6;
     padding: 1.5em;
     display: flex;
     flex-wrap: wrap;
