@@ -1,0 +1,129 @@
+/*Estilos del panel de filtros y el botón de filtros*/
+.btn-filtro {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border: none;
+    cursor: pointer;
+}
+.panel-filtros {
+    position: absolute;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    margin-bottom: 2rem;
+    width: 400px;
+    margin-left: 10%;
+    padding-top: 1rem;
+}
+.campo label,
+.campo input,
+.campo select {
+    font-size: 16px;
+}
+
+.campo.doble input {
+    width: 20%;
+}
+
+.campo input,
+.campo select {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 2px solid var(--secondary-color);
+}
+
+.campo {
+    margin-bottom: 1rem;
+}
+
+/* Estilos de la barra de búsqueda y el botón buscar */
+.busqueda-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.input-busqueda {
+    flex-grow: 1;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* Estilos de la trjeta */
+#results-container {
+    border: 2px solid var(--secondary-color);
+    margin-left: 1%;
+    margin-right: 1%;
+    padding: 2rem 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid var(--secondary-color);
+    border-radius: 17px;
+    padding: 15px;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background-color: var(--primary-color);
+    width: 300px;
+}
+
+.tarjeta .encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    margin-bottom: 1rem;
+    height: max-content;
+}
+.tarjeta .encabezado .sub-encabezado #recomendado {
+    background-color: var(--highlighter-color);
+    color: var(--background-color);
+}
+.tarjeta .encabezado .sub-encabezado h3{
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+.tarjeta .encabezado .sub-encabezado p {
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+.tarjeta .encabezado .sub-encabezado.right {
+    text-align: right;
+}
+
+.tarjeta .encabezado .sub-encabezado.left {
+    text-align: left;
+    width: 60%;
+}
+.tarjeta .estado {
+    color: var(--background-color);
+    width: max-content;
+    margin-top:auto;
+}
+.disponible{
+    background-color: var(--line-color);
+}
+.ausente{
+    background-color: var(--line-color-2);
+}
+.ocupado{
+    background-color: var(--line-color-3);
+}
+.tarjeta .detalles {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+.tarjeta .acciones{
+    margin-top: auto; /* Empuja el contenedor abajo (en FlexBox)*/
+    text-align: center;
+}
