@@ -16,7 +16,7 @@ body{
 }
 
 section{
-    background: url(../img/background-01.jpg);
+    background: url(../res/img/background-01.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
