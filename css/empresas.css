@@ -10,7 +10,7 @@
     background-color: var(--secondary-color);
     color: var(--background-color);
     margin-bottom: 2rem;
-    width: 400px;
+    width: 420px;
     margin-left: 10%;
     padding-top: 1rem;
 }
@@ -34,7 +34,18 @@
 .campo {
     margin-bottom: 1rem;
 }
-
+.campo .checkboxes label img{
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin: 0 0.1rem;
+}
+.campo .checkboxes label {
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
 /* Estilos de la barra de búsqueda y el botón buscar */
 .busqueda-bar {
     display: flex;
@@ -122,6 +133,23 @@
 .tarjeta .detalles {
     text-align: left;
     margin-bottom: 1rem;
+}
+.tarjeta .detalles div {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+.tarjeta .detalles div p {
+    margin: 0;
+}
+.tarjeta .detalles div .materiales-iconos-container {
+    align-items: center;
+    padding: 0 0.5rem;
+    display: flex;
+}
+.tarjeta .detalles div .materiales-iconos-container .material-icono {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.25rem;
 }
 .tarjeta .acciones{
     margin-top: auto; /* Empuja el contenedor abajo (en FlexBox)*/

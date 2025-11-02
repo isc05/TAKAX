@@ -1,4 +1,13 @@
-// Para generar una tarjeta de centro de reciclaje
+// Para generar una tarjeta de centro de reciclaje {reglas de llenado}
+const MAPEO_ICONOS = {
+    "cartón": "../res/icon/cardboard.png",
+    "papel": "../res/icon/paper.png",
+    "aluminio": "../res/icon/aluminum.png",
+    "plástico": "../res/icon/plastic.png",
+    "vidrio": "../res/icon/glass.png",
+    // ...añade todos tus materiales aquí
+};
+
 export function crearTarjeta(centro) {
     const template = document.getElementById("tarjeta-template");
     const clone = template.content.cloneNode(true);
@@ -11,7 +20,21 @@ export function crearTarjeta(centro) {
         centro.direccion.calle + ", " +
         "No. " + centro.direccion.numero + ", " +
         "CP: " + centro.direccion.codigoPostal;
-    clone.querySelector(".materiales").textContent = centro.materiales.join(", ");
+    const iconosContainer = clone.querySelector(".materiales-iconos-container");
+    // clone.querySelector(".materiales").textContent = centro.materiales.join(", ");
+    centro.materiales.forEach(nombreMaterial => {
+        const urlIcono = MAPEO_ICONOS[nombreMaterial.toLowerCase()]; // .toLowerCase() por si acaso
+        // Si encontramos un icono para ese material
+        if (urlIcono) {
+            const img = document.createElement("img");
+            img.src = urlIcono;
+            img.alt = nombreMaterial; // Texto alternativo (importante)
+            img.title = nombreMaterial; // Texto al pasar el mouse (útil)
+            img.classList.add("material-icono"); // Añade una clase para estilos
+            
+            iconosContainer.appendChild(img);
+        }
+    });
     clone.querySelector(".precio").textContent = `$${centro.precioMin} - $${centro.precioMax} MXN`;
     clone.querySelector(".rating").textContent = centro.rating;
 
