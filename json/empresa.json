@@ -1,0 +1,21 @@
+[
+    {
+    "nombre": "Empresa 1",
+    "tipo": "Tienda de conveniencia",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "telefono": "123 456 7890",
+    "email": "email@example.com",
+    "rfc": "RFC123456",
+    "status": "active",
+    "premium": false,
+    "modo": "Disponible"
+    }
+]

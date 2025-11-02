@@ -1,0 +1,68 @@
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit; /* Hereda de html */
+}
+:root {
+    --primary-color: #C0EBA6;
+    --secondary-color: #16610E;
+    --dark-color: #000;
+    --line-color: #093FB4;
+    --line-color-2:#9d09b4;
+    --line-color-3:#cec434;
+    /*dark blue alternative #0a0b45*/
+    --background-color: #E0F4FF;
+    --button-color: #E5446D;
+    --highlighter-color: #FF7832;
+    --font:Arial, sans-serif;
+    --transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1)
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    font-family: var(--font); /* Aplica aquí la fuente y un fallback */
+    margin: 0; /* Buen reseteo básico */
+}
+/* Clases asignables */
+.font-size-high {
+    font-size: 20px;
+}
+.font-size-normal {
+    font-size: 18px;
+}
+.font-size-small {
+    font-size: 16px;
+}
+
+.radius-standard {
+    border-radius: 17px;
+}
+
+.radius-standard-small {
+    border-radius: 10px;
+}
+
+.padding-standard {
+    padding: 10px 18px;
+}
+
+.padding-small {
+    padding: 5px 10px;
+}
+.btn {
+    background-color: var(--button-color);
+    color: var(--background-color);
+    border: none;
+    cursor: pointer;
+}
+/* Clases asignables auxiliares de ocultamiento */
+.hidden {
+    display: none;
+}
+.invisible {
+    visibility: hidden;
+}

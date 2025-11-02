@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../res/icon/logo-takax.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/empresas.css">
+    <script type="module" src="../js/main_empresa.js" defer></script>
+    <title>TAKAX - Empresas</title>
+</head>
+<body>
+    <p>Vista para empresas (La diseñada en figma)</p>
+    <h2 id="user-name-text"></h2>
+    <button class="btn" id="logout">Logout</button>
+    <section class="busqueda-bar">
+        <button id="toggle-filtros" class="btn-filtro font-size-high radius-standard padding-standard">Filter
+            ▼</button>
+        <input type="text" id="busqueda-nombre" placeholder="Recycling center name..."
+            class="input-busqueda font-size-high radius-standard padding-standard" />
+        <button id="btn-buscar" class="btn font-size-high radius-standard padding-standard">Search</button>
+    </section>
+    <section id="panel-filtros" class="panel-filtros radius-standard padding-standard hidden">
+        <!-- Filtro por rating mínimo -->
+        <div class="campo">
+            <label for="filtro-rating">Rating:</label>
+            <select id="filtro-rating">
+                <option value="">Todos</option>
+                <option value="5">5&#9733;</option>
+                <option value="4.5">4.5+&#9733;</option>
+                <option value="4">4+&#9733;</option>
+                <option value="3">3+&#9733;</option>
+            </select>
+        </div>
+
+        <!-- Filtro por cercanía (simulado como distancia en km) -->
+        <div class="campo">
+            <label for="filtro-distancia">Distancia máxima (km):</label>
+            <input type="number" id="filtro-distancia" min="1" max="20" placeholder="Ej. 10" />
+        </div>
+
+        <!-- Filtro por precio por kilo -->
+        <div class="campo doble">
+            <label>Precio por kilo (MXN):</label>
+            <input type="number" id="precio-min" placeholder="Mínimo" min="0" step="0.1" />
+            <input type="number" id="precio-max" placeholder="Máximo" min="0" step="0.1" />
+        </div>
+
+        <!-- Filtro por tipo de material -->
+        <div class="campo">
+            <label>Materiales aceptados:</label>
+            <div class="checkboxes" id="material">
+                <label for="plastico"><input type="checkbox" value="plástico" class="material-checkbox" id="plastico" />
+                    Plástico</label>
+                <label for="carton"><input type="checkbox" value="cartón" class="material-checkbox" id="carton" />
+                    Cartón</label>
+                <label for="papel"><input type="checkbox" value="papel" class="material-checkbox" id="papel" />
+                    Papel</label>
+                <label for="aluminio"><input type="checkbox" value="aluminio" class="material-checkbox" id="aluminio" />
+                    Aluminio</label>
+                <label for="vidrio"><input type="checkbox" value="vidrio" class="material-checkbox" id="vidrio" />
+                    Vidrio</label>
+            </div>
+        </div>
+
+        <!-- Botón para aplicar filtros -->
+        <div class="campo">
+            <button id="aplicar-filtros" class="radius-standard-small btn font-size-small padding-small">Aplicar
+                filtros</button>
+        </div>
+    </section>
+
+    <div id="results-container"></div>
+
+    <!-- Plantilla (no se carga) -->
+    <template id="tarjeta-template">
+        <div class="tarjeta">
+            <div class="encabezado">
+                <div class="sub-encabezado left">
+                    <h3 class="nombre font-size-high"></h3>
+                    <span class="tipo font-size-normal"></span>
+                </div>
+                <div class="sub-encabezado right">
+                    <div id="recomendado" class="padding-standard radius-standard-small">
+                    <span class="recomendado font-size-small"></span>
+                    </div>
+                    <p class="font-size-normal">⭐ <span class="rating font-size-normal"></span>/5</p>
+                </div>
+            </div>
+            <div class="estado padding-small radius-standard-small">
+                <span class="txtestado font-size-small"></span>
+            </div>
+            <div class="detalles">
+                <p><strong>📍Dirección:</strong> <span class="direccion font-size-normal"></span></p>
+                <p><strong>Acepta:</strong> <span class="materiales font-size-normal"></span></p>
+                <p><strong>Precio por kilo:</strong> <span class="precio font-size-normal"></span></p>
+            </div>
+            <div class="acciones">
+                <button class="contactar btn font-size-normal padding-standard radius-standard-small">Contactar</button>
+            </div>
+        </div>
+    </template>
+</body>
+</html>

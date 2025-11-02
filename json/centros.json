@@ -1,0 +1,98 @@
+[
+  {
+    "nombre": "Centro 1",
+    "tipo": "Recicladora de cartón y aluminio",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "telefono": "123 456 7890",
+    "email": "email@example.com",
+    "rfc": "RFC123456",
+    "materiales": ["cartón", "papel", "aluminio"],
+    "precioMin": 1.5,
+    "precioMax": 2.0,
+    "rating": 4.5,
+    "recomendado": true,
+    "status": "active",
+    "premium": false,
+    "modo": "Disponible"
+  },
+  {
+    "nombre": "Centro 2",
+    "tipo": "Recicladora de vidrio y plástico",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "telefono": "123 456 7890",
+    "email": "email@example.com",
+    "rfc": "RFC123456",
+    "materiales": ["vidrio", "plástico"],
+    "precioMin": 1.0,
+    "precioMax": 3.6,
+    "rating": 4.3,
+    "recomendado": true,
+    "status": "active",
+    "premium": false,
+    "modo": "Ocupado"
+  },
+  {
+    "nombre": "Centro 3",
+    "tipo": "Recicladora de aluminio y plástico",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "telefono": "123 456 7890",
+    "email": "email@example.com",
+    "rfc": "RFC123456",
+    "materiales": ["aluminio", "plástico"],
+    "precioMin": 3.2,
+    "precioMax": 4.3,
+    "rating": 4.8,
+    "recomendado": true,
+    "status": "active",
+    "premium": false,
+    "modo": "Disponible"
+  },
+  {
+    "nombre": "Centro 4",
+    "tipo": "Recicladora de vidrio y aluminio",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "telefono": "123 456 7890",
+    "email": "email@example.com",
+    "rfc": "RFC123456",
+    "materiales": ["vidrio", "aluminio"],
+    "precioMin": 1.7,
+    "precioMax": 2.1,
+    "rating": 3.9,
+    "recomendado": false,
+    "status": "active",
+    "premium": false,
+    "modo": "Ausente"
+  }
+]
