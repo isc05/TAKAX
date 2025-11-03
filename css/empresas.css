@@ -1,3 +1,68 @@
+/* Estilos del header */
+.main-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    border-bottom: 4px solid var(--line-color);
+    color: var(--background-color);
+    margin-bottom: 2rem;
+    justify-content: space-around;
+}
+.container-header {
+    display: flex;
+    align-items: center;
+    width: 33%;
+}
+.container-header h2, .container-header img{
+    cursor: pointer;
+}
+.logo-header {
+    height: 60px;
+    width: 60px;
+    align-items: center;
+}
+.background-logo-header{
+    background-color: var(--background-color);
+    border-radius: 50%;
+    padding: 0.2rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.title-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+.ui-profile {
+    list-style: none;
+    margin: 0;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    text-align: left;
+    position: absolute;
+    top: 85px;
+}
+.ui-profile li {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+.ui-profile li:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    cursor: pointer;
+}
+.ui-profile .exception-li-ui {
+    border: none;
+    text-align: center;
+}
+.ui-profile .exception-li-ui:hover {
+    background-color: var(--primary-color);
+    cursor: default;
+}
 /*Estilos del panel de filtros y el botón de filtros*/
 .btn-filtro {
     background-color: var(--secondary-color);
@@ -65,10 +130,10 @@
 
 /* Estilos de la trjeta */
 #results-container {
-    border: 2px solid var(--secondary-color);
+    border: 1px solid var(--secondary-color);
     margin-left: 1%;
     margin-right: 1%;
-    padding: 2rem 0rem;
+    padding: 1rem 0rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -81,11 +146,12 @@
     border: 2px solid var(--secondary-color);
     border-radius: 17px;
     padding: 15px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     margin-left: 2rem;
     margin-right: 2rem;
     background-color: var(--primary-color);
     width: 300px;
+    height: max-content;
 }
 
 .tarjeta .encabezado {

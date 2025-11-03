@@ -66,3 +66,6 @@ body {
 .invisible {
     visibility: hidden;
 }
+.align-right {
+    justify-content: right;
+}

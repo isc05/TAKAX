@@ -5,9 +5,14 @@ Auth.protegerPagina();
  //sección de prueba - login correcto
 const usuario = Auth.obtenerUsuarioActual();
 const userNameText = document.getElementById("user-name-text");
+const userRoleText = document.getElementById("user-role-text");
+const userName = document.querySelector(".user-name");
+const userEmail = document.querySelector(".user-email");
     if (usuario) {
-      
+      userRoleText.innerText = `Perfil de ${usuario.tipo}`;
       userNameText.innerText = `Bienvenido: ${usuario.name}`;
+      userName.innerText = `Nombre: ${usuario.name}`;
+      userEmail.innerText = `Correo: ${usuario.email}`;
     }
     console.log("Usuario actual:", usuario);
 // Lógica de la página de empresas - búsqueda y filtros de centros de reciclaje
@@ -24,10 +29,29 @@ async function cargarDatos() {
 function mostrarResultados(lista) {
   const contenedor = document.getElementById("results-container");
   contenedor.innerHTML = "";
-  if (lista.length > 0)
-    lista.forEach(c => contenedor.appendChild(crearTarjeta(c)));
-  else {
-    document.getElementById("results-container").innerHTML = "<p>No se encontraron centros de reciclaje.</p>";
+  const listaOrdenada = lista.sort((a, b) => {
+    
+    // Criterio 1: "recomendado" (true=1, false=0)
+    // Ordena recomendados (1) antes que no recomendados (0)
+    const critRecomendado = b.recomendado - a.recomendado;
+
+    // Si son diferentes en "recomendado" (uno es 1 y el otro 0),
+    // usamos ese resultado y terminamos.
+    if (critRecomendado !== 0) {
+      return critRecomendado;
+    }
+
+    // Criterio 2: Si son iguales en "recomendado" (critRecomendado es 0),
+    // entonces ordenamos por 'rating' de mayor a menor.
+    return b.rating - a.rating;
+    //esta función está bien diabólica, apenas y la entiendo yo mismo :D
+  });
+
+  if (listaOrdenada.length > 0) {
+    // Ahora usamos la 'listaOrdenada' para crear las tarjetas
+    listaOrdenada.forEach(c => contenedor.appendChild(crearTarjeta(c)));
+  } else {
+    contenedor.innerHTML = "<p>No se encontraron centros de reciclaje.</p>";
   }
 }
 
@@ -58,6 +82,10 @@ function aplicarFiltros() {
   mostrarResultados(filtrados);
 }
 
+function mostrarUI(){
+  const UI = document.querySelector(".ui-profile");
+  UI.classList.toggle("hidden");
+}
 document.addEventListener("DOMContentLoaded", () => {
   //mostrarResultados(centros);
   cargarDatos();
@@ -72,4 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("logout").addEventListener("click", () => {
     Auth.cerrarSesion();
   });
+  const userImg = document.getElementById("profile-img");
+  const userType = document.getElementById("user-role-text");
+  userImg.addEventListener("click", mostrarUI);
+  userType.addEventListener("click", mostrarUI);
 });

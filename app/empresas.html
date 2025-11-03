@@ -10,9 +10,25 @@
     <title>TAKAX - Empresas</title>
 </head>
 <body>
-    <p>Vista para empresas (La diseñada en figma)</p>
-    <h2 id="user-name-text"></h2>
-    <button class="btn" id="logout">Logout</button>
+    <header class="main-header">
+        <div class="container-header">
+        <div class="background-logo-header"><img src="../res/icon/logo-takax.png" alt="Logo de TAKAX" class="logo-header" draggable="false"></div>
+        <h1 class="title-header">TAKAX | Empresas</h1>
+        </div>
+        <h2 id="user-name-text"></h2>
+        <div class="container-header align-right">
+        <div class="background-logo-header" id="profile-img"><img src="../res/icon/user.png" alt="Icono de usuario" class="logo-header" draggable="false"></div>
+        <h2 id="user-role-text"></h2>
+        <ul class="ui-profile radius-standard padding-standard font-size-small">
+            <li class="user-name"></li>
+            <li class="user-email"></li>
+            <li>Cambiar contraseña</li>
+            <li>Cambiar datos</li>
+            <li>Historial de transacciones</li>
+            <li class="exception-li-ui"><button class="btn radius-standard-small padding-small" id="logout">Cerrar sesión</button></li>
+        </ul>
+        </div>
+    </header>
     <section class="busqueda-bar">
         <button id="toggle-filtros" class="btn-filtro font-size-high radius-standard padding-standard">Filter
             ▼</button>
@@ -60,6 +76,10 @@
                     Aluminio <img src="../res/icon/aluminum.png" alt="aluminio"></label>
                 <label for="vidrio"><input type="checkbox" value="vidrio" class="material-checkbox" id="vidrio" />
                     Vidrio <img src="../res/icon/glass.png" alt="vidrio"></label>
+                <label for="baterias"><input type="checkbox" value="baterías" class="material-checkbox" id="baterias" />
+                    Baterías <img src="../res/icon/battery.png" alt="baterías"></label>
+                <label for="metales"><input type="checkbox" value="metales" class="material-checkbox" id="metales">
+                Metales <img src="../res/icon/iron.png" alt="metales"></label>
             </div>
         </div>
 
@@ -77,8 +97,8 @@
         <div class="tarjeta">
             <div class="encabezado">
                 <div class="sub-encabezado left">
-                    <h3 class="nombre font-size-high"></h3>
-                    <span class="tipo font-size-normal"></span>
+                    <h3 class="nombre font-size-normal"></h3>
+                    <span class="tipo font-size-small"></span>
                 </div>
                 <div class="sub-encabezado right">
                     <div id="recomendado" class="padding-standard radius-standard-small">
