@@ -64,10 +64,16 @@
     cursor: default;
 }
 /* Estilos del footer */
+
 .main-footer {
-    text-align: center;
+    width: 100%;
     padding: 1rem;
-    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    position: static;
+    bottom: auto;
 }
 /*Estilos del panel de filtros y el botón de filtros*/
 .btn-filtro {
@@ -84,6 +90,7 @@
     width: 420px;
     margin-left: 10%;
     padding-top: 1rem;
+    top: 180px;
 }
 .campo label,
 .campo input,

@@ -26,6 +26,9 @@ body {
     color: var(--secondary-color);
     font-family: var(--font); /* Aplica aquí la fuente y un fallback */
     margin: 0; /* Buen reseteo básico */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 /* Clases asignables */
 .font-size-high {
