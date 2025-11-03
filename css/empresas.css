@@ -63,6 +63,12 @@
     background-color: var(--primary-color);
     cursor: default;
 }
+/* Estilos del footer */
+.main-footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
 /*Estilos del panel de filtros y el botón de filtros*/
 .btn-filtro {
     background-color: var(--secondary-color);
