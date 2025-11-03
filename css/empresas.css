@@ -1,3 +1,74 @@
+/* Estilos del header */
+.main-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    border-bottom: 4px solid var(--line-color);
+    color: var(--background-color);
+    margin-bottom: 2rem;
+    justify-content: space-around;
+}
+.container-header {
+    display: flex;
+    align-items: center;
+    width: 33%;
+}
+.container-header h2, .container-header img{
+    cursor: pointer;
+}
+.logo-header {
+    height: 60px;
+    width: 60px;
+    align-items: center;
+}
+.background-logo-header{
+    background-color: var(--background-color);
+    border-radius: 50%;
+    padding: 0.2rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.title-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+.ui-profile {
+    list-style: none;
+    margin: 0;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    text-align: left;
+    position: absolute;
+    top: 85px;
+}
+.ui-profile li {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+.ui-profile li:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    cursor: pointer;
+}
+.ui-profile .exception-li-ui {
+    border: none;
+    text-align: center;
+}
+.ui-profile .exception-li-ui:hover {
+    background-color: var(--primary-color);
+    cursor: default;
+}
+/* Estilos del footer */
+.main-footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
 /*Estilos del panel de filtros y el botón de filtros*/
 .btn-filtro {
     background-color: var(--secondary-color);
@@ -10,7 +81,7 @@
     background-color: var(--secondary-color);
     color: var(--background-color);
     margin-bottom: 2rem;
-    width: 400px;
+    width: 420px;
     margin-left: 10%;
     padding-top: 1rem;
 }
@@ -34,7 +105,18 @@
 .campo {
     margin-bottom: 1rem;
 }
-
+.campo .checkboxes label img{
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin: 0 0.1rem;
+}
+.campo .checkboxes label {
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
 /* Estilos de la barra de búsqueda y el botón buscar */
 .busqueda-bar {
     display: flex;
@@ -54,10 +136,10 @@
 
 /* Estilos de la trjeta */
 #results-container {
-    border: 2px solid var(--secondary-color);
+    border: 1px solid var(--secondary-color);
     margin-left: 1%;
     margin-right: 1%;
-    padding: 2rem 0rem;
+    padding: 1rem 0rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -70,11 +152,12 @@
     border: 2px solid var(--secondary-color);
     border-radius: 17px;
     padding: 15px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     margin-left: 2rem;
     margin-right: 2rem;
     background-color: var(--primary-color);
     width: 300px;
+    height: max-content;
 }
 
 .tarjeta .encabezado {
@@ -122,6 +205,23 @@
 .tarjeta .detalles {
     text-align: left;
     margin-bottom: 1rem;
+}
+.tarjeta .detalles div {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+.tarjeta .detalles div p {
+    margin: 0;
+}
+.tarjeta .detalles div .materiales-iconos-container {
+    align-items: center;
+    padding: 0 0.5rem;
+    display: flex;
+}
+.tarjeta .detalles div .materiales-iconos-container .material-icono {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.25rem;
 }
 .tarjeta .acciones{
     margin-top: auto; /* Empuja el contenedor abajo (en FlexBox)*/
