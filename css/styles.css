@@ -1,7 +1,8 @@
 section{
     display:flex;
     flex-wrap: wrap;
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content;
     align-items: center;
     justify-content: center;
     flex-direction: column;
@@ -34,8 +35,10 @@ section form label{
     padding:0.2em;
     margin-bottom: 0.5em;
 }
-
-section form input, section form select{
+#empresa-detalles{
+    width: 100%;
+}
+section form input, section form select, section form div input{
     width: 100%;
     margin-bottom: 1em;
     padding: 0.8em;

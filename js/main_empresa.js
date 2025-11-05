@@ -9,7 +9,7 @@ const userRoleText = document.getElementById("user-role-text");
 const userName = document.querySelector(".user-name");
 const userEmail = document.querySelector(".user-email");
     if (usuario) {
-      userRoleText.innerText = `Perfil de ${usuario.tipo}`;
+      userRoleText.innerText = `${usuario.clase}`;
       userNameText.innerText = `Bienvenido: ${usuario.name}`;
       userName.innerText = `Nombre: ${usuario.name}`;
       userEmail.innerText = `Correo: ${usuario.email}`;
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Auth.cerrarSesion();
   });
   const userImg = document.getElementById("profile-img");
-  const userType = document.getElementById("user-role-text");
+  const userType = document.getElementById("enterprise-profile");
   userImg.addEventListener("click", mostrarUI);
   userType.addEventListener("click", mostrarUI);
 });
