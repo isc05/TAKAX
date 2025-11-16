@@ -66,6 +66,9 @@ export function crearTarjeta(centro) {
 
     const estado = clone.querySelector(".estado");
     const txtestado = clone.querySelector(".txtestado");
+    const contactarBtn = clone.querySelector(".contactar");
+    contactarBtn.dataset.centroNombre = centro.nombre;
+    
     switch (centro.modo) {
         case "Disponible":
             txtestado.textContent = "Disponible";

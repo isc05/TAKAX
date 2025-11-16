@@ -234,3 +234,65 @@
     margin-top: auto; /* Empuja el contenedor abajo (en FlexBox)*/
     text-align: center;
 }
+/* Estilos de los "detalles" del centro*/
+.detalles-area{
+    border: 1px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    margin: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+.detalles-area #back{
+    background-image: url("/res/icon/arrow-left.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    left: 2.5rem;
+}
+.detalles-area .container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /*gap: 2rem;*/
+    width: 50%;
+}
+.detalles-area .container.in-left .sub-container-double h3{
+    width: 50%;    
+}
+.sub-container-double{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.detalles-area .container.in-right #recomendado-det{
+    width: 80%;
+    text-align: center;
+}
+.detalles-area .container #recomendado-det{
+    background-color: var(--highlighter-color);
+    color: var(--background-color);
+    margin-bottom: 2rem;
+}
+.detalles-area #map {
+    width: 90%;
+    height: 280px;
+    border: 2px solid var(--secondary-color);
+    border-radius: var(--radius-standard-small);
+    margin-bottom: 1rem;
+}
+#img-centro-container {
+    display: flex;
+    width: 70%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--radius-standard-small);
+    border: 2px solid var(--secondary-color);
+    background-image: url("/res/img/Centro-de-reciclaje.jpg");
+    margin-top: 1rem;
+}
