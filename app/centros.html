@@ -5,9 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../res/icon/logo-takax.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/centros.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="../js/map.js" defer></script>
     <title>TAKAX - Centros</title>
 </head>
 <body>
-    <p>Vista para centros (Por definir)</p>
+    <header class="main-header">
+        <div class="container-header">
+        <div class="background-logo-header"><img src="../res/icon/logo-takax.png" alt="Logo de TAKAX" class="logo-header" draggable="false"></div>
+        <h1 class="title-header">TAKAX | Centros</h1>
+        </div>
+        <h2 id="user-name-text"></h2>
+        <div class="container-header align-right">
+        <div class="background-logo-header" id="profile-img"><img src="../res/icon/user.png" alt="Icono de usuario" class="logo-header" draggable="false"></div>
+        <h2 id="enterprise-profile">Perfil de centro</h2>
+        <ul class="ui-profile radius-standard padding-standard font-size-small hidden">
+            <li class="user-name"></li>
+            <li id="user-role-text"></li>
+            <li class="user-email"></li>
+            <li>Cambiar contraseña</li>
+            <li>Cambiar datos</li>
+            <li>Cambiar método de pago</li>
+            <li class="exception-li-ui"><button class="btn radius-standard-small padding-small" id="logout">Cerrar sesión</button></li>
+        </ul>
+        </div>
+    </header>
+    <main id="main-content">
+        <div class="container-column">
+            <section class="panel radius-standard padding-standard">
+            <h2>Tus Socios <img src="../res/icon/information-button.png" alt="info"></h2>
+            <ul>
+                <li><strong>Cliente 1. Empresa 1</strong><button class="btn font-size-small padding-small radius-standard-small">Chat</button></li>
+                <li><strong>Cliente 2. Oxxo</strong><button class="btn font-size-small padding-small radius-standard-small">Chat</button></li>
+                <li><strong>Cliente 3. Tiendita</strong><button class="btn font-size-small padding-small radius-standard-small">Chat</button></li>
+            </ul>
+        </section>
+        <section class="panel radius-standard padding-standard">
+            <h2>Tus Compras <img src="../res/icon/information-button.png" alt="info"></h2>
+            <ul>
+                <li>Compra 1. <span><strong class="positive">$89.45</strong> <strong class="negative">(+10%)</strong></span></li>
+                <li>Compra 2 <span><strong class="positive">$300.19</strong> <strong class="negative">(+10%)</strong></span></li>
+                <li>Compra 3 <span><strong class="positive">$42.39</strong> <strong class="negative">(+10%)</strong></span></li>
+            </ul>
+        </section>
+        </div>
+        <section class="panel radius-standard padding-standard">
+            <h2>Tu Centro <img src="../res/icon/information-button.png" alt="info"></h2>
+            <ul>
+                <li>Plan: Gratuito</li>
+                <li>Calificación: 3.9/5</li>
+                <li>RFC: RFC01TST</li>
+            </ul>
+            <strong>Localización:</strong>
+            <div id="map"><!-- Mapa --></div>
+            <p>📍Atlixco, Puebla, Centro histórico, Col 5 de mayo No. 35, CP 72315</p>
+        </section>
+        <section class="panel radius-standard padding-standard">
+            <h2>Tu Tarjeta en TAKAX <img src="../res/icon/information-button.png" alt="info"></h2>
+            <ul>
+                <li><span><strong>Nombre: </strong><span>Centro 1</span></span></li>
+                <li><span><strong>Direccion: </strong><span>📍Atlixco, Puebla, Centro histórico, Col 5 de mayo No. 35, CP 72315</span></span></li>
+                <li><span><strong>Teléfono: </strong><span>244 100 1011</span></span></li>
+                <li><strong>Estado: <select name="estado" id="estado" class="radius-standard-small">
+                    <option value="activo">Activo</option>
+                    <option value="ocupado">Ocupado</option>
+                    <option value="Ausente">Ausente</option>
+                </select></strong></li>
+                <li><strong>Residuos que reciclas:</strong></li>
+                <li><div>
+                    <label><input type="checkbox" name="residuo" value="plástico"><img src="../res/icon/plastic.png" alt="plástico"> Plástico</label>
+                    <label><input type="checkbox" name="residuo" value="vidrio"><img src="../res/icon/glass.png" alt="vidrio"> Vidrio</label>
+                    <label><input type="checkbox" name="residuo" value="cartón"><img src="../res/icon/cardboard.png" alt="cartón"> Cartón</label>
+                    <label><input type="checkbox" name="residuo" value="papel"><img src="../res/icon/paper.png" alt="papel"> Papel</label>
+                    <label><input type="checkbox" name="residuo" value="baterías"><img src="../res/icon/battery.png" alt="baterías"> Baterías</label>
+                    <label><input type="checkbox" name="residuo" value="metales"><img src="../res/icon/iron.png" alt="metales"> Metales</label>
+                    <label><input type="checkbox" name="residuo" value="aluminio"><img src="../res/icon/aluminum.png" alt="aluminio"> Aluminio</label>
+                    <label><input type="checkbox" name="residuo" value="otro"><img src="../res/icon/bin.png" alt="genérico">Otro: <input type="text" placeholder="Electrónicos"></label>
+                </div></li>
+            </ul>
+            <button class="btn font-size-small padding-standard radius-standard-small">Publicar tarjeta</button>
+        </section>
+    </main>
+    <footer class="main-footer">
+        <p>© 2025 VitaDevs - TAKAX.</p>
+    </footer>
 </body>
 </html>
