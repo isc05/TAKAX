@@ -3,49 +3,75 @@ import { Auth } from './auth.js';
 //Proteger esta página
 Auth.protegerLogin();
 
-const loginForm = document.querySelector('#loginForm')
+const loginForm = document.querySelector('#loginForm');
+/**
+ * Función auxiliar para buscar usuario en un archivo JSON.
+ * @param {string} url - Ruta del archivo JSON.
+ * @param {string} email - Email a buscar.
+ * @param {string} password - Contraseña a verificar.
+ * @param {string} tipoForzado - El 'tipo' de usuario que contiene este JSON ('empresa' o 'centro').
+ * @returns {object|null} - Retorna el usuario normalizado o null si no se encuentra.
+ */
+async function buscarEnJson(url, email, password, tipoForzado) {
+    try {
+        const res = await fetch(url);
+        if (!res.ok) return null; // Si falla la carga, asumimos no encontrado
+
+        const lista = await res.json();
+        
+        // Buscamos coincidencia (manejando 'password' o 'contrasena' del JSON)
+        const encontrado = lista.find(item => 
+            item.email.toLowerCase() === email && 
+            (item.password == password || item.contrasena == password)
+        );
+        if (encontrado) {
+            // Normalizamos el objeto para la sesión (Estandarizamos 'name' y agregamos 'tipo')
+            return {
+                ...encontrado,
+                name: encontrado.nombre || encontrado.name, // Asegura que siempre haya un 'name'
+                tipo: tipoForzado // Forzamos el tipo según el archivo de origen
+            };
+        }
+        return null;
+    } catch (error) {
+        console.error(`Error leyendo ${url}:`, error);
+        return null;
+    }
+}
 loginForm.addEventListener('submit', async (e)=>{
     e.preventDefault()
-    const email = document.querySelector('#email').value
-    const password = document.querySelector('#password').value
+    // Normalizamos inputs (Buena práctica)
+    const emailInput = document.querySelector('#email').value.trim().toLowerCase();
+    const passwordInput = document.querySelector('#password').value.trim();
+    // 1. Buscar en localStorage (Prioridad a usuarios registrados manualmente)
     const localUsers = JSON.parse(localStorage.getItem('users')) || [];
-    let validUser = localUsers.find(user => user.email === email && user.password === password);
-    if(validUser){
-        alert(`Bienvenido ${validUser.name}`)
-        Auth.iniciarSesion(validUser);
-        window.location.href = 'app/index.html'
-        return ; 
-    }
-    // Si no se encontró localmente, buscamos en el JSON.
-    try {
-        const res = await fetch('json/empresa.json');
-        if (!res.ok) throw new Error('No se pudo cargar el archivo de empresas.');
-        
-        const jsonEmpresas = await res.json();
-
-        // Buscamos en el JSON.
-        // También convertimos a string la contraseña del JSON por si es un número
-        validUser = jsonEmpresas.find(empresa => 
-            empresa.email === email && 
-            empresa.password.toString() === password
-        );
-
-        if (validUser) {
-            const userSessionData = { ...validUser};
-
-            alert(`Bienvenido (${validUser.tipo}) ${validUser.name}`);
-            Auth.iniciarSesion(userSessionData);
-            window.location.href = 'app/index.html';
-            return;
-        }
-
-    } catch (error) {
-        console.error("Error al leer empresa.json:", error);
-        alert("Ocurrió un error al intentar iniciar sesión. Revisa la consola.");
+    const validLocalUser = localUsers.find(user => 
+        user.email.toLowerCase() === emailInput && user.password === passwordInput
+    );
+    if (validLocalUser) {
+        alert(`Bienvenido de nuevo, ${validLocalUser.name}`);
+        Auth.iniciarSesion(validLocalUser);
+        window.location.href = 'app/index.html';
         return;
     }
-    // --- Si no se encontró en ninguna fuente ---
-    return alert('Usuario y/o contraseña incorrectos!'); 
+    // 2. Buscar en empresa.json
+    const empresaUser = await buscarEnJson('json/empresa.json', emailInput, passwordInput, 'empresa');
+    if (empresaUser) {
+        alert(`Bienvenido (Empresa Verificada): ${empresaUser.name}`);
+        Auth.iniciarSesion(empresaUser);
+        window.location.href = 'app/index.html';
+        return;
+    }
+    // 3. Buscar en centros.json
+    const centroUser = await buscarEnJson('json/centros.json', emailInput, passwordInput, 'centro');
+    if (centroUser) {
+        alert(`Bienvenido (Centro Verificado): ${centroUser.name}`);
+        Auth.iniciarSesion(centroUser);
+        window.location.href = 'app/index.html';
+        return;
+    }
+    // 4. Si no se encuentra en ningún lado
+    alert('Usuario y/o contraseña incorrectos.'); 
 })
 
 //Ahora estos usuarios de prueba no se utilizarán, ya que los usuarios predefinidos estarán en el archivo empresa.json

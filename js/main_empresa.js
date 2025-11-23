@@ -14,7 +14,7 @@ const userEmail = document.querySelector(".user-email");
       userName.innerText = `Nombre: ${usuario.name}`;
       userEmail.innerText = `Correo: ${usuario.email}`;
     }
-    console.log("Usuario actual:", usuario);
+    //console.log("Usuario actual:", usuario);
 // Lógica de la página de empresas - búsqueda y filtros de centros de reciclaje
 import { crearTarjeta } from "./tarjeta.js";
 

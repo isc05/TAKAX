@@ -15,7 +15,7 @@ export function crearTarjeta(centro) {
     const clone = template.content.cloneNode(true);
 
     clone.querySelector(".nombre").textContent = centro.nombre;
-    clone.querySelector(".tipo").textContent = centro.tipo;
+    clone.querySelector(".clase").textContent = centro.clase;
     if (centro && centro.direccion) {
         clone.querySelector(".direccion").textContent = centro.direccion.ciudad + ", " +
             centro.direccion.estado + ", " +

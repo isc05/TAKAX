@@ -1,7 +1,8 @@
 [
   {
     "nombre": "Centro 1",
-    "tipo": "Recicladora de cartón y aluminio",
+    "clase": "Recicladora de cartón y aluminio",
+    "tipo": "centro",
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
@@ -12,8 +13,9 @@
         "codigoPostal": "74200"
     },
     "telefono": "123 456 7890",
-    "email": "email@example.com",
+    "email": "email1@example.com",
     "rfc": "RFC123456",
+    "password": "1234",
     "materiales": ["cartón", "papel", "aluminio"],
     "precioMin": 1.5,
     "precioMax": 2.0,
@@ -25,7 +27,8 @@
   },
   {
     "nombre": "Centro 2",
-    "tipo": "Recicladora de vidrio y plástico",
+    "clase": "Recicladora de vidrio y plástico",
+    "tipo": "centro",
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
@@ -36,8 +39,9 @@
         "codigoPostal": "74200"
     },
     "telefono": "123 456 7890",
-    "email": "email@example.com",
-    "rfc": "RFC123456",
+    "email": "email2@example.com",
+    "rfc": "RFC234567",
+    "password": "1234",
     "materiales": ["vidrio", "plástico"],
     "precioMin": 1.0,
     "precioMax": 3.6,
@@ -49,7 +53,8 @@
   },
   {
     "nombre": "Centro 3",
-    "tipo": "Recicladora de aluminio y plástico",
+    "clase": "Recicladora de aluminio y plástico",
+    "tipo": "centro",
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
@@ -60,8 +65,9 @@
         "codigoPostal": "74200"
     },
     "telefono": "123 456 7890",
-    "email": "email@example.com",
-    "rfc": "RFC123456",
+    "email": "email3@example.com",
+    "rfc": "RFC345678",
+    "password": "1234",
     "materiales": ["aluminio", "plástico"],
     "precioMin": 3.2,
     "precioMax": 4.3,
@@ -73,7 +79,8 @@
   },
   {
     "nombre": "Centro 4",
-    "tipo": "Recicladora de vidrio y aluminio",
+    "clase": "Recicladora de vidrio y aluminio",
+    "tipo": "centro",
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
@@ -84,8 +91,9 @@
         "codigoPostal": "74200"
     },
     "telefono": "123 456 7890",
-    "email": "email@example.com",
-    "rfc": "RFC123456",
+    "email": "email4@example.com",
+    "rfc": "RFC456789",
+    "password": "1234",
     "materiales": ["vidrio", "aluminio"],
     "precioMin": 1.7,
     "precioMax": 2.1,
@@ -97,7 +105,8 @@
   },
   {
     "nombre": "Dimsa Reciclados S.A de C.V",
-    "tipo": "Reciclaje de materiales",
+    "clase": "Reciclaje de materiales",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -110,6 +119,7 @@
     "telefono": "222 574 11 05",
     "email": "dimsarecicladora@hotmail.com",
     "rfc": "RFCABC123",
+    "password": "1234",
     "materiales": ["plástico", "metales"],
     "precioMin": 1.5,
     "precioMax": 30.0,
@@ -121,7 +131,8 @@
   },
   {
     "nombre": "Ferrometales Ferrosos y Metales De Oriente",
-    "tipo": "Reciclaje de metales y materiales ferrosos",
+    "clase": "Reciclaje de metales y materiales ferrosos",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -134,6 +145,7 @@
     "telefono": "222 539 69 69",
     "email": "info@ferrometales.com",
     "rfc": "RFC123456",
+    "password": "1234",
     "materiales": ["metales", "residuos industriales"],
     "precioMin": 6.5,
     "precioMax": 25.0,
@@ -145,7 +157,8 @@
   },
   {
     "nombre": "Recicladora Upam",
-    "tipo": "Reciclaje de residuos sólidos",
+    "clase": "Reciclaje de residuos sólidos",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -158,6 +171,7 @@
     "telefono": "222 474 17 28",
     "email": "contacto@recicladoraupam.com",
     "rfc": "RFC789012",
+    "password": "1234",
     "materiales": ["papel", "cartón", "plástico", "metales", "madera", "baterías", "vidrio"],
     "precioMin": 0.5,
     "precioMax": 40.0,
@@ -169,7 +183,8 @@
   },
   {
     "nombre": "Reintegra Amozoc de Mota",
-    "tipo": "Compra venta de desperdicios industriales y manejo de materiales",
+    "clase": "Compra venta de desperdicios industriales y manejo de materiales",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -182,6 +197,7 @@
     "telefono": "222 243 84 33",
     "email": "jmijares@reintegrasur.com",
     "rfc": "RFC112233",
+    "password": "1234",
     "materiales": ["metales", "desperdicios industriales"],
     "precioMin": 10.5,
     "precioMax": 20.0,
@@ -193,7 +209,8 @@
   },
   {
     "nombre": "Recicla Electrónica /Recielec",
-    "tipo": "Reciclaje de equipos eléctricos y electrónicos obsoletos",
+    "clase": "Reciclaje de equipos eléctricos y electrónicos obsoletos",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -206,6 +223,7 @@
     "telefono": "221 167 67 39",
     "email": "recicladosdelatorre@hotmail.com",
     "rfc": "RFC222333",
+    "password": "1234",
     "materiales": ["plástico", "metales", "vidrio", "madera"],
     "precioMin": 1.2,
     "precioMax": 20.0,
@@ -217,7 +235,8 @@
   },
   {
     "nombre": "Rexa Recicladora",
-    "tipo": "Reciclaje y comercialización de plásticos",
+    "clase": "Reciclaje y comercialización de plásticos",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -230,6 +249,7 @@
     "telefono": "558 548 08 75",
     "email": "giovanni@rexa-recicladora.com.mx",
     "rfc": "RFC000111",
+    "password": "1234",
     "materiales": ["plástico"],
     "precioMin": 4.0,
     "precioMax": 16.5,
@@ -241,7 +261,8 @@
   },
   {
     "nombre": "Reciclán",
-    "tipo": "Reciclaje de residuos inorgánicos reciclables",
+    "clase": "Reciclaje de residuos inorgánicos reciclables",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -254,6 +275,7 @@
     "telefono": "222 587 84 85",
     "email": "reciclanpuebla@gmail.com",
     "rfc": "RFCTRM340",
+    "password": "1234",
     "materiales": ["papel", "cartón", "plástico", "metales", "madera", "vidrio", "electrónicos"],
     "precioMin": 4.5,
     "precioMax": 20.0,
@@ -265,7 +287,8 @@
   },
   {
     "nombre": "Reciclacentro Puebla",
-    "tipo": "Compra y manejo de acero, chatarra, metales y residuos industriales",
+    "clase": "Compra y manejo de acero, chatarra, metales y residuos industriales",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -278,6 +301,7 @@
     "telefono": "222 271 30 22",
     "email": "reciclacentropueblapuebla@gmail.com",
     "rfc": "RFCBLC720",
+    "password": "1234",
     "materiales": ["metales"],
     "precioMin": 27.0,
     "precioMax": 30.5,
@@ -289,7 +313,8 @@
   },
   {
     "nombre": "Transformadora Loba S De Rl De Cv",
-    "tipo": "Reciclaje de cartón",
+    "clase": "Reciclaje de cartón",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -302,6 +327,7 @@
     "telefono": "222 708 41 75",
     "email": "transloba.constructorwebtp.com.mx",
     "rfc": "RFCTLN341",
+    "password": "1234",
     "materiales": ["papel", "cartón"],
     "precioMin": 1.5,
     "precioMax": 3.0,
@@ -313,7 +339,8 @@
   },
   {
     "nombre": "Reciclajes Talisman",
-    "tipo": "Reciclaje de residuos industriales",
+    "clase": "Reciclaje de residuos industriales",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -326,6 +353,7 @@
     "telefono": "222 224 49 05",
     "email": "compramaterial@reciclajestalisman.com",
     "rfc": "RFCPRM670",
+    "password": "1234",
     "materiales": ["papel", "cartón", "plástico", "metales", "madera", "electrónicos"],
     "precioMin": 1.5,
     "precioMax": 8.16,
@@ -337,7 +365,8 @@
   },
   {
     "nombre": "Reciclados Anjus",
-    "tipo": "Comercialización de material reciclado y desmantelamiento de naves industriales",
+    "clase": "Comercialización de material reciclado y desmantelamiento de naves industriales",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -350,6 +379,7 @@
     "telefono": "221 515 32 28",
     "email": "info@recicladosanjus.com",
     "rfc": "RFCAAE010",
+    "password": "1234",
     "materiales": ["plástico", "metales", "telas", "electrónicos"],
     "precioMin": 4.0,
     "precioMax": 15.0,
@@ -361,7 +391,8 @@
   },
   {
     "nombre": "Reciclados AR",
-    "tipo": "Reciclaje de residuos de manejo especial",
+    "clase": "Reciclaje de residuos de manejo especial",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -374,6 +405,7 @@
     "telefono": "222 469 12 12",
     "email": "aramirez.recicladosar@gmail.com",
     "rfc": "RFCSGP880",
+    "password": "1234",
     "materiales": ["plástico", "madera"],
     "precioMin": 0.8,
     "precioMax": 10.0,
@@ -385,7 +417,8 @@
   },
   {
     "nombre": "Recicladora San Miguelito",
-    "tipo": "Reciclaje de materiales reciclables",
+    "clase": "Reciclaje de materiales reciclables",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -398,6 +431,7 @@
     "telefono": "222 196 68 60",
     "email": "informes@reciclasm.com",
     "rfc": "RFCVTB541",
+    "password": "1234",
     "materiales": ["papel", "cartón", "plástico", "metales", "electrónicos"],
     "precioMin": 1.5,
     "precioMax": 30.0,
@@ -409,7 +443,8 @@
   },
   {
     "nombre": "Recicladora Un Mundo Mejor Tehuacán",
-    "tipo": "Reciclaje y gestión de residuos",
+    "clase": "Reciclaje y gestión de residuos",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -422,6 +457,7 @@
     "telefono": "238 211 27 17",
     "email": "tehuacan@recicladoramundomejor.mx",
     "rfc": "RFCDHR950",
+    "password": "1234",
     "materiales": ["plástico", "metales", "baterías"],
     "precioMin": 0.14,
     "precioMax": 35.0,
@@ -433,7 +469,8 @@
   },
   {
     "nombre": "Itzocan Recicladora",
-    "tipo": "Reciclaje de metales",
+    "clase": "Reciclaje de metales",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -446,6 +483,7 @@
     "telefono": "243 690 06 21",
     "email": "ventas@itzocanrecicladora.com",
     "rfc": "RFCMXP781",
+    "password": "1234",
     "materiales": ["plástico", "metales", "materiales peligrosos", "electrónicos", "baterías", "vidrio"],
     "precioMin": 0.1,
     "precioMax": 17.0,
@@ -457,7 +495,8 @@
   },
   {
     "nombre": "Grupo Gama Reciclaje",
-    "tipo": "Reciclaje de materiales ferrosos y no ferrosos [...]",
+    "clase": "Reciclaje de materiales ferrosos y no ferrosos [...]",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -470,6 +509,7 @@
     "telefono": "238 107 33 49",
     "email": "compras@recicladoragama.com",
     "rfc": "RFCNSL110",
+    "password": "1234",
     "materiales": ["papel", "cartón", "plástico", "metales", "telas"],
     "precioMin": 2.5,
     "precioMax": 22.0,
@@ -481,7 +521,8 @@
   },
   {
     "nombre": "Grupo Avio",
-    "tipo": "Empresa dedicada a la compra y venta de plásticos.",
+    "clase": "Empresa dedicada a la compra y venta de plásticos.",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -494,6 +535,7 @@
     "telefono": "238 103 41 86",
     "email": "contacto@grupoavio.mx",
     "rfc": "RFCMFT841",
+    "password": "1234",
     "materiales": ["plástico", "metales"],
     "precioMin": 1.5,
     "precioMax": 12.0,
@@ -505,7 +547,8 @@
   },
   {
     "nombre": "Fierros y Metales 25 Norte",
-    "tipo": "Reciclaje de metales y fierros",
+    "clase": "Reciclaje de metales y fierros",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -518,6 +561,7 @@
     "telefono": "222 978 49 75",
     "email": "fierrosymetales25norte@gmail.com",
     "rfc": "RFCPQR990",
+    "password": "1234",
     "materiales": ["metales"],
     "precioMin": 4.0,
     "precioMax": 30.0,
@@ -529,7 +573,8 @@
   },
   {
     "nombre": "Deacero Patio Puebla",
-    "tipo": "Producción y comercialización de productos de acero",
+    "clase": "Producción y comercialización de productos de acero",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -542,6 +587,7 @@
     "telefono": "222 288 66 47",
     "email": "puebla@deacero.com.mx",
     "rfc": "RFCVZM230",
+    "password": "1234",
     "materiales": ["metales"],
     "precioMin": 4.75,
     "precioMax": 35.0,
@@ -553,7 +599,8 @@
   },
   {
     "nombre": "Chatarreria Calderon",
-    "tipo": "Compra de fierro",
+    "clase": "Compra de fierro",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -566,6 +613,7 @@
     "telefono": "248 201 9630",
     "email": "chatarracalderon@hotmail.com",
     "rfc": "RFCHDW760",
+    "password": "1234",
     "materiales": ["plástico", "metales", "electrónicos"],
     "precioMin": 4.0,
     "precioMax": 76.0,
@@ -577,7 +625,8 @@
   },
   {
     "nombre": "Boc Reciclados",
-    "tipo": "Reciclaje de plástico post-consumo y post-industrial",
+    "clase": "Reciclaje de plástico post-consumo y post-industrial",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -590,6 +639,7 @@
     "telefono": "222 762 85 36",
     "email": "contacto@boc.mx",
     "rfc": "RFCDNV121",
+    "password": "1234",
     "materiales": ["plástico"],
     "precioMin": 4.0,
     "precioMax": 10.0,
@@ -601,7 +651,8 @@
   },
   {
     "nombre": "Aceros Myj Reciclados",
-    "tipo": "Reciclaje de metales ferrosos y no ferrosos",
+    "clase": "Reciclaje de metales ferrosos y no ferrosos",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -614,6 +665,7 @@
     "telefono": "221 241 95 80",
     "email": "reciclados@acerosmyj.com",
     "rfc": "RFCNGJ890",
+    "password": "1234",
     "materiales": ["metales"],
     "precioMin": 4.2,
     "precioMax": 66.0,
@@ -625,7 +677,8 @@
   },
   {
     "nombre": "RECICLAMEX",
-    "tipo": "Recicladora de papel, cartón y metal",
+    "clase": "Recicladora de papel, cartón y metal",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -638,6 +691,7 @@
     "telefono": "222 813 7382",
     "email": "reciclamex@live.com.mx",
     "rfc": "RFC38001A",
+    "password": "1234",
     "materiales": ["plástico", "papel", "metales"],
     "precioMin": 1.5,
     "precioMax": 15.0,
@@ -649,7 +703,8 @@
   },
   {
     "nombre": "La Gran Bodega del Reciclado Atlixco",
-    "tipo": "Centro de acopio de materiales reciclables",
+    "clase": "Centro de acopio de materiales reciclables",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -662,6 +717,7 @@
     "telefono": "2244 448 4219",
     "email": "contacto@recicladoatlixco.com",
     "rfc": "RFC220720",
+    "password": "1234",
     "materiales": ["plástico", "papel", "cartón", "metales"],
     "precioMin": 1.5,
     "precioMax": 35.0,
@@ -673,7 +729,8 @@
   },
   {
     "nombre": "Recicladora El Clonaje",
-    "tipo": "Recicladora de papel y cartón",
+    "clase": "Recicladora de papel y cartón",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -686,6 +743,7 @@
     "telefono": "2244 448 4219",
     "email": "reciclaje@recicladoraelclonaje.com",
     "rfc": "RFC220720",
+    "password": "1234",
     "materiales": ["papel", "cartón"],
     "precioMin": 1.5,
     "precioMax": 12.0,
@@ -697,7 +755,8 @@
   },
   {
     "nombre": "RECICLAMEX EL POPO",
-    "tipo": "Centro de acopio de desperdicio industrial",
+    "clase": "Centro de acopio de desperdicio industrial",
+    "tipo": "centro",
     "direccion": {
       "pais": "México",
       "estado": "Puebla",
@@ -710,6 +769,7 @@
     "telefono": "222 813 7382",
     "email": "popo@reciclamex.com",
     "rfc": "RFC20875A",
+    "password": "1234",
     "materiales": ["plástico", "metales", "papel", "cartón", "desechos electrónicos"],
     "precioMin": 0.3,
     "precioMax": 25.0,

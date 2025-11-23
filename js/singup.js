@@ -11,51 +11,73 @@ selectType.addEventListener('change', (e) => {
         empresaDetalles.classList.add('hidden');
     }
 });
-const signupForm = document.querySelector('#signupForm')
+/**
+ * Verifica si un email existe en un archivo JSON.
+ */
+async function existeEnJson(url, email) {
+    try {
+        const res = await fetch(url);
+        if (!res.ok) return false;
+        const lista = await res.json();
+        return lista.some(item => item.email.toLowerCase() === email);
+    } catch (error) {
+        console.warn(`No se pudo verificar en ${url}`);
+        return false;
+    }
+}
+const signupForm = document.querySelector('#signupForm');
+
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault()
-    const name = document.querySelector('#name').value
-    const email = document.querySelector('#email').value
-    const password = document.querySelector('#password').value
+    // Recolección y limpieza de datos
+    const name = document.querySelector('#name').value.trim();
+    const email = document.querySelector('#email').value.trim().toLowerCase();
+    const password = document.querySelector('#password').value;
+    const passwordConfirm = document.querySelector('#password-confirm').value;
     const tipo = document.querySelector('#tipo').value;
-    const rfc = document.querySelector('#rfc').value;
-    const phone = document.querySelector('#phone').value;
-    if(tipo === 'empresa'){
-        const clase = document.querySelector('#clase').value;
+    const rfc = document.querySelector('#rfc').value.trim().toUpperCase(); // RFC siempre mayúsculas
+    const phone = document.querySelector('#phone').value.trim();
+    const clase = document.querySelector('#clase').value.trim();
+    // Validación básica de contraseñas
+    if (password !== passwordConfirm) {
+        return alert('Las contraseñas no coinciden.');
     }
 
     // --- Check 1: Verificar en localStorage ---
-
     const localUsers = JSON.parse(localStorage.getItem('users')) || [];
-    let isUserRegistered = localUsers.find(user => user.email === email);
-    if (isUserRegistered) {
-        return alert('¡El email ya esta registado (local)!')
+    const existeLocal = localUsers.find(user => user.email === email || user.rfc === rfc);
+
+    if (existeLocal) {
+        return alert('¡El usuario (Email o RFC) ya está registrado localmente!');
     }
-    // --- Check 2: Verificar en json/empresa.json ---
-    try {
-        const res = await fetch('json/empresa.json');
-        if (!res.ok) throw new Error('No se pudo cargar el archivo de empresas.');
+    // --- Check 2: Verificar en JSONs (Empresas Y Centros) ---
+    // Usamos Promise.all para verificar ambos archivos simultáneamente (Más rápido)
+    const [existeEnEmpresas, existeEnCentros] = await Promise.all([
+        existeEnJson('json/empresa.json', email),
+        existeEnJson('json/centros.json', email)
+    ]);
 
-        const jsonEmpresas = await res.json();
-        isUserRegistered = jsonEmpresas.find(empresa => empresa.email === email);
-
-        if (isUserRegistered) {
-            return alert('Ese email pertenece a una empresa. Por favor, inicia sesión.');
-        }
-
-    } catch (error) {
-        console.error("Error al leer empresa.json:", error);
-        alert("Ocurrió un error al registrar. Revisa la consola.");
-        return;
+    if (existeEnEmpresas || existeEnCentros) {
+        return alert('Este correo ya pertenece a una cuenta verificada del sistema. Por favor inicia sesión.');
     }
 
-    // --- Si pasó ambas validaciones, lo registramos (en localStorage) ---
-    const newUser = { name, email, password, tipo, rfc, phone, clase: tipo === 'empresa' ? document.querySelector('#clase').value : undefined };
+    // --- CREACIÓN DE USUARIO ---
+    const newUser = { 
+        name, 
+        email, 
+        password, 
+        phone, 
+        rfc, 
+        tipo, 
+        clase
+    };
+
     localUsers.push(newUser);
     localStorage.setItem('users', JSON.stringify(localUsers));
 
     alert('¡Registro Exitoso!');
+    
+    // Auto-login
     Auth.iniciarSesion(newUser);
     window.location.href = 'app/index.html';
-
-})
+});
