@@ -27,23 +27,23 @@ document.addEventListener("DOMContentLoaded", () => {
     if (userName) userName.forEach(n => {
       n.innerText = `${usuario.name}`;
     });
-    if (userEmail) userEmail.forEach(e => {
+    if (userEmail & usuario.emial) userEmail.forEach(e => {
       e.innerText = `${usuario.email}`;
     });
     if (userPlan) userPlan.forEach(p => {
       p.innerText = usuario.premium ? "Premium" : "Gratuito";
     });
     if (userRate) userRate.forEach(r => {
-      r.innerText = (typeof usuario.rating === "number") ? usuario.rating.toFixed(1) : "";
+      r.innerText = (typeof usuario.rating === "number") ? usuario.rating.toFixed(1) : "-";
     });
     if (userRfc) userRfc.forEach(ur => {
       ur.innerText = usuario.rfc || "-";
     });
-    if (userLocation) userLocation.forEach(l => {
+    if (userLocation & usuario.direccion) userLocation.forEach(l => {
       l.innerText = `📍${usuario.direccion.calle}, No. ${usuario.direccion.numero}, ${usuario.direccion.colonia}, CP. ${usuario.direccion.codigoPostal}, ${usuario.direccion.ciudad}, ${usuario.direccion.estado}, ${usuario.direccion.pais}.` || "-";
     });
     if (userPhone) userPhone.forEach(up => {
-      up.innerText = usuario.telefono || "-";
+      up.innerText = usuario.telefono || usuario.phone || "-";
     });
   }
 
@@ -53,4 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (userType) userType.addEventListener("click", mostrarUI);
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) logoutBtn.addEventListener("click", () => Auth.cerrarSesion());
+
+  console.log(usuario);
 });
