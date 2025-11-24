@@ -48,7 +48,7 @@
     "rating": 4.3,
     "recomendado": true,
     "status": "active",
-    "premium": false,
+    "premium": true,
     "modo": "Ocupado"
   },
   {
@@ -126,7 +126,7 @@
     "rating": 5.0,
     "recomendado": true,
     "status": "active",
-    "premium": false,
+    "premium": true,
     "modo": "Disponible"
   },
   {
@@ -308,7 +308,7 @@
     "rating": 4.4,
     "recomendado": true,
     "status": "active",
-    "premium": false,
+    "premium": true,
     "modo": "Disponible"
   },
   {
@@ -386,7 +386,7 @@
     "rating": 4.2,
     "recomendado": true,
     "status": "active",
-    "premium": false,
+    "premium": true,
     "modo": "Disponible"
   },
   {

@@ -25,9 +25,9 @@
         <div class="background-logo-header" id="profile-img"><img src="../res/icon/user.png" alt="Icono de usuario" class="logo-header" draggable="false"></div>
         <h2 id="enterprise-profile">Perfil de centro</h2>
         <ul class="ui-profile radius-standard padding-standard font-size-small hidden">
-            <li class="user-name"></li>
+            <li>Nombre: <span class="account-name"></span></li>
             <li id="user-role-text"></li>
-            <li class="user-email"></li>
+            <li>Correo: <span class="account-email"></span></li>
             <li>Cambiar contraseña</li>
             <li>Cambiar datos</li>
             <li>Cambiar método de pago</li>
@@ -57,20 +57,20 @@
         <section class="panel radius-standard padding-standard">
             <h2>Tu Centro <img src="../res/icon/information-button.png" alt="info"></h2>
             <ul>
-                <li>Plan: Gratuito</li>
-                <li>Calificación: 3.9/5</li>
-                <li>RFC: RFC01TST</li>
+                <li><span>Plan: <strong class="account-plan">-</strong></span></li>
+                <li><span>Calificación: <strong class="account-rate">-</strong>/5⭐</span></li>
+                <li><span>RFC: <strong class="account-rfc">-</strong></span></li>
             </ul>
             <strong>Localización:</strong>
             <div id="map"><!-- Mapa --></div>
-            <p>📍Atlixco, Puebla, Centro histórico, Col 5 de mayo No. 35, CP 72315</p>
+            <p class="account-location">-</p>
         </section>
         <section class="panel radius-standard padding-standard">
             <h2>Tu Tarjeta en TAKAX <img src="../res/icon/information-button.png" alt="info"></h2>
             <ul>
-                <li><span><strong>Nombre: </strong><span>Centro 1</span></span></li>
-                <li><span><strong>Direccion: </strong><span>📍Atlixco, Puebla, Centro histórico, Col 5 de mayo No. 35, CP 72315</span></span></li>
-                <li><span><strong>Teléfono: </strong><span>244 100 1011</span></span></li>
+                <li><span><strong>Nombre: </strong><span class="account-name">-</span></span></li>
+                <li><span><strong>Direccion: </strong><span class="account-location">-</span></span></li>
+                <li><span><strong>Teléfono: </strong><span class="account-phone">-</span></span></li>
                 <li><strong>Estado: <select name="estado" id="estado" class="radius-standard-small">
                     <option value="activo">Activo</option>
                     <option value="ocupado">Ocupado</option>

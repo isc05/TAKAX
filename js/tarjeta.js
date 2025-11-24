@@ -17,12 +17,13 @@ export function crearTarjeta(centro) {
     clone.querySelector(".nombre").textContent = centro.nombre;
     clone.querySelector(".clase").textContent = centro.clase;
     if (centro && centro.direccion) {
-        clone.querySelector(".direccion").textContent = centro.direccion.ciudad + ", " +
-            centro.direccion.estado + ", " +
-            centro.direccion.colonia + ", " +
-            centro.direccion.calle + ", " +
-            "No. " + centro.direccion.numero + ", " +
-            "CP: " + centro.direccion.codigoPostal;
+        clone.querySelector(".direccion").textContent = centro.direccion.calle + ", No. " +
+            centro.direccion.numero +
+            centro.direccion.colonia + ", CP. " +
+            centro.direccion.codigoPostal +
+            centro.direccion.ciudad + ", " +
+            centro.direccion.estado + "," +
+            centro.direccion.pais +".";
     } else {
         // Handle cases where centro.direccion is undefined or null
         // For example, set an empty string or a default message
