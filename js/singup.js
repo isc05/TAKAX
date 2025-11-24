@@ -2,15 +2,15 @@ import { Auth } from './auth.js';
 
 Auth.protegerLogin();
 
-const selectType = document.querySelector('#tipo');
-selectType.addEventListener('change', (e) => {
-    const empresaDetalles = document.querySelector('#empresa-detalles');
-    if (e.target.value === 'empresa') {
-        empresaDetalles.classList.remove('hidden');
-    }else{
-        empresaDetalles.classList.add('hidden');
-    }
-});
+// const selectType = document.querySelector('#tipo');
+// selectType.addEventListener('change', (e) => {
+//     const empresaDetalles = document.querySelector('#empresa-detalles');
+//     if (e.target.value === 'empresa') {
+//         empresaDetalles.classList.remove('hidden');
+//     }else{
+//         empresaDetalles.classList.add('hidden');
+//     }
+// });
 /**
  * Verifica si un email existe en un archivo JSON.
  */
