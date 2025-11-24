@@ -9,12 +9,12 @@ const userRoleText = document.getElementById("user-role-text");
 const userName = document.querySelector(".user-name");
 const userEmail = document.querySelector(".user-email");
     if (usuario) {
-      userRoleText.innerText = `Perfil de ${usuario.tipo}`;
+      userRoleText.innerText = `${usuario.clase}`;
       userNameText.innerText = `Bienvenido: ${usuario.name}`;
       userName.innerText = `Nombre: ${usuario.name}`;
       userEmail.innerText = `Correo: ${usuario.email}`;
     }
-    console.log("Usuario actual:", usuario);
+    //console.log("Usuario actual:", usuario);
 // Lógica de la página de empresas - búsqueda y filtros de centros de reciclaje
 import { crearTarjeta } from "./tarjeta.js";
 
@@ -82,6 +82,27 @@ function aplicarFiltros() {
   mostrarResultados(filtrados);
 }
 
+/**
+ * Rellena los detalles del centro en el área de detalles
+ * @param {object} centro - El objeto del centro de reciclaje clickeado.
+ */
+function poblarDetalles(centro) {
+  const detallesArea = document.querySelector("#detalles");
+  const recomendado = detallesArea.querySelector("#recomendado-det");
+
+  if (!centro || !detallesArea) return;
+  recomendado.classList.remove("invisible");
+  if (!centro.recomendado) {
+    recomendado.classList.add("invisible");
+  }
+  // Rellena los campos (Usa los IDs/clases de tu HTML en empresas.html)
+  // (Estos son ejemplos, ajusta los selectores a tu HTML real)
+  detallesArea.querySelector("#nombre-centro-det").innerText = centro.nombre;
+  detallesArea.querySelector("#telefono-centro-det").innerText = `Teléfono: ${centro.telefono}`;
+  detallesArea.querySelector("#direccion-det").innerText = `📍Dirección: ${centro.direccion.ciudad} ,${centro.direccion.estado}, ${centro.direccion.colonia}, ${centro.direccion.calle} No. ${centro.direccion.numero}, CP: ${centro.direccion.codigoPostal},`;
+  detallesArea.querySelector("#rating-det").innerText = centro.rating;
+}
+
 function mostrarUI(){
   const UI = document.querySelector(".ui-profile");
   UI.classList.toggle("hidden");
@@ -101,7 +122,35 @@ document.addEventListener("DOMContentLoaded", () => {
     Auth.cerrarSesion();
   });
   const userImg = document.getElementById("profile-img");
-  const userType = document.getElementById("user-role-text");
+  const userType = document.getElementById("enterprise-profile");
   userImg.addEventListener("click", mostrarUI);
   userType.addEventListener("click", mostrarUI);
+
+  const backBtn = document.getElementById("back");
+  const detallesArea = document.querySelector("#detalles");
+  const mainSection = document.querySelector("#main-content");
+  const resultsContainer = document.getElementById("results-container");
+  resultsContainer.addEventListener("click", (event) => {
+    // 1. Comprueba si el elemento clickeado (o su padre) tiene la clase .contactar
+    const contactarBtn = event.target.closest(".contactar");
+    if (contactarBtn) {
+      // 2. ¡Sí! Obtén el ID (nombre) que guardamos en el data-*
+      const nombreCentro = contactarBtn.dataset.centroNombre;
+      // 3. Busca el objeto 'centro' completo en tu array 'centros'
+      const centroClickeado = centros.find(c => c.nombre === nombreCentro);
+      if (centroClickeado) {
+        // 4. (Solución Problema 2) Llama a la función para llenar los detalles
+        poblarDetalles(centroClickeado);
+        // 5. Muestra la sección de detalles
+        detallesArea.classList.remove("hidden");
+        mainSection.classList.add("hidden");
+      }
+    }
+  });
+  backBtn.addEventListener("click", () => {
+    detallesArea.classList.add("hidden");
+    mainSection.classList.remove("hidden");
+  });
+
+  
 });

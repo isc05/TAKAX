@@ -6,7 +6,12 @@
     <link rel="shortcut icon" href="../res/icon/logo-takax.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/empresas.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../js/main_empresa.js" defer></script>
+    <script src="../js/map.js" defer></script>
     <title>TAKAX - Empresas</title>
 </head>
 <body>
@@ -18,9 +23,10 @@
         <h2 id="user-name-text"></h2>
         <div class="container-header align-right">
         <div class="background-logo-header" id="profile-img"><img src="../res/icon/user.png" alt="Icono de usuario" class="logo-header" draggable="false"></div>
-        <h2 id="user-role-text"></h2>
-        <ul class="ui-profile radius-standard padding-standard font-size-small">
+        <h2 id="enterprise-profile">Perfil de empresa</h2>
+        <ul class="ui-profile radius-standard padding-standard font-size-small hidden">
             <li class="user-name"></li>
+            <li id="user-role-text"></li>
             <li class="user-email"></li>
             <li>Cambiar contraseña</li>
             <li>Cambiar datos</li>
@@ -29,6 +35,7 @@
         </ul>
         </div>
     </header>
+    <main id="main-content">
     <section class="busqueda-bar">
         <button id="toggle-filtros" class="btn-filtro font-size-high radius-standard padding-standard">Filter
             ▼</button>
@@ -91,8 +98,31 @@
     </section>
 
     <div id="results-container"></div>
+    </main>
+    <section id="detalles" class="hidden">
+        <div class="detalles-area radius-standard padding-standard">
+            <div id="back"></div>
+            <div class="container in-left">
+            <h1>Cómo llegar</h1>
+            <div id="map"><!-- Mapa --></div>
+            <div class="sub-container-double">
+                <h3 id="direccion-det">📍Dirección: Atlixco, Puebla, Centro histórico ...</h3>
+            <h3 id="telefono-centro-det">Teléfono: 244 100 1011</h3>
+            </div>
+            </div>
+            <div class="container in-right">
+                <div id="recomendado-det" class="padding-standard radius-standard-small">
+                    <span class="recomendado font-size-small">Recomendado</span>
+                </div>
+                <strong class="font-size-high">⭐ <span class="rating font-size-high" id="rating-det">4.3</span>/5</strong>
+                <div id="img-centro-container"></div>
+                <h2 id="nombre-centro-det">Centro 1</h2>
+                <button class="btn font-size-normal padding-standard radius-standard-small">Chat</button>
+            </div>
+        </div>
+    </section>
     <footer class="main-footer">
-        <p>© 2025 TAKAX. All rights reserved.</p>
+        <p>© 2025 VitaDevs - TAKAX.</p>
     </footer>
     <!-- Plantilla (no se carga) -->
     <template id="tarjeta-template">
@@ -100,7 +130,7 @@
             <div class="encabezado">
                 <div class="sub-encabezado left">
                     <h3 class="nombre font-size-normal"></h3>
-                    <span class="tipo font-size-small"></span>
+                    <span class="clase font-size-small"></span>
                 </div>
                 <div class="sub-encabezado right">
                     <div id="recomendado" class="padding-standard radius-standard-small">

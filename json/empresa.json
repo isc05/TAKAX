@@ -1,7 +1,8 @@
 [
     {
-    "nombre": "Empresa 1",
-    "tipo": "Tienda de conveniencia",
+    "name": "Empresa 1",
+    "clase": "Tienda de conveniencia",
+    "tipo": "empresa",
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
@@ -11,11 +12,54 @@
         "numero": "123",
         "codigoPostal": "74200"
     },
-    "telefono": "123 456 7890",
+    "phone": "123 456 7890",
     "email": "email@example.com",
     "rfc": "RFC123456",
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "password": "1234"
+    },
+    {
+    "name": "Alice's Store",
+    "clase": "Supermercado",
+    "tipo": "empresa",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "phone": "123 456 7890",
+    "email": "alice@gmail.com",
+    "rfc": "RFC987654",
+    "status": "active",
+    "premium": false,
+    "modo": "Disponible",
+    "password": "1234"
+    },
+    {
+    "name": "Oxxo",
+    "clase": "Tienda de conveniencia",
+    "tipo": "empresa",
+    "direccion": {
+        "pais": "México", 
+        "estado": "Puebla", 
+        "ciudad": "Atlixco", 
+        "colonia": "Centro historico",
+        "calle": "5 de mayo",
+        "numero": "123",
+        "codigoPostal": "74200"
+    },
+    "phone": "123 456 7890",
+    "email": "oxxo@email.com",
+    "rfc": "RFC123456",
+    "status": "active",
+    "premium": false,
+    "modo": "Disponible",
+    "password": "1234"
     }
 ]
