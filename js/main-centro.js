@@ -15,7 +15,7 @@ function mostrarUI(){
   UI.classList.toggle("hidden");
 }
 async function cargarSocios() {
-  console.log(localStorage);
+  console.log('cargando socios comerciales...');
     const container = document.getElementById("socios-container");
     container.innerHTML = "";
     const usuarioActual = Auth.obtenerUsuarioActual();
@@ -137,4 +137,15 @@ cargarSocios();
   if (logoutBtn) logoutBtn.addEventListener("click", () => Auth.cerrarSesion());
 
   console.log(usuario);
+});
+// Listener para saber cuando la lista de socios del centro se actualiza
+window.addEventListener('storage', (event) => {
+    // 1. Verificamos si lo que cambió en localStorage es una historia de chat
+    if (event.key && event.key.startsWith('chat_history_')) {
+        
+        console.log("Actualizando lista de socios...");
+        
+        // 2. Volvemos a ejecutar la función que escanea y dibuja la lista
+        cargarSocios();
+    }
 });
