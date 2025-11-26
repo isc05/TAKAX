@@ -2,8 +2,13 @@ import { Auth } from './auth.js';
 
 // ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
- //sección de prueba - login correcto
+// RE-ASEGURAR EL CANDADO
+// Si llegué aquí es que tengo sesión iniciada, así que marco el territorio de nuevo
 const usuario = Auth.obtenerUsuarioActual();
+if (usuario) {
+    Auth.bloquearUsuario(usuario.email);
+}
+ //sección de prueba - login correcto
 const userNameText = document.getElementById("user-name-text");
 const userRoleText = document.getElementById("user-role-text");
 const userName = document.querySelector(".user-name");
@@ -101,6 +106,30 @@ function poblarDetalles(centro) {
   detallesArea.querySelector("#telefono-centro-det").innerText = `Teléfono: ${centro.telefono}`;
   detallesArea.querySelector("#direccion-det").innerText = `📍Dirección: ${centro.direccion.ciudad} ,${centro.direccion.estado}, ${centro.direccion.colonia}, ${centro.direccion.calle} No. ${centro.direccion.numero}, CP: ${centro.direccion.codigoPostal},`;
   detallesArea.querySelector("#rating-det").innerText = centro.rating;
+
+  // LÓGICA DEL CHAT
+    const btnChat = document.querySelector("#btn-chat-centro");
+    // Eliminamos listeners anteriores clonando el botón (Truco para evitar múltiples clicks)
+    const newBtnChat = btnChat.cloneNode(true);
+    btnChat.parentNode.replaceChild(newBtnChat, btnChat);
+    newBtnChat.addEventListener("click", () => {
+        // Obtenemos el usuario actual para validar
+        const currentUser = Auth.obtenerUsuarioActual();
+        if(!currentUser.rfc) {
+            alert("Error: Tu usuario no tiene un RFC válido para chatear.");
+            return;
+        }
+        // VALIDACIÓN DE RFC DEL CENTRO
+        // Asegúrate de que en centros.json todos tengan "rfc"
+        if(!centro.rfc) {
+            alert("Este centro no tiene un RFC configurado para el chat.");
+            return;
+        }
+        // REDIRECCIÓN AL CHAT
+        // Pasamos el RFC y el Nombre del centro por URL
+        const url = `chat.html?rfc=${encodeURIComponent(centro.rfc)}&name=${encodeURIComponent(centro.nombre)}`;
+        window.location.href = url;
+    });
 }
 
 function mostrarUI(){

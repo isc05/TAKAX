@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../res/icon/logo-takax.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/chat.css">
+    <script type="module" src="../js/chat.js" defer></script>
+    <title>Chat</title>
+</head>
+<body>
+    <section id="panel-chat" class="radius-standard">
+        <section id="header-chat">
+            <div id="back"></div>
+            <h1>Chat</h1>
+            <button id="clear-chat-btn" class="btn font-size-small radius-standard-small">
+                Limpiar Chat
+            </button>
+        </section>
+        <section id="chat-container">
+            <div id="chat" class="padding-standard">
+            </div>
+            <div id="actions">
+                <textarea name="mensaje" id="mensaje" class="radius-standard font-size-normal"
+                    placeholder="Escribe un mensaje..."></textarea>
+                <input type="submit" value="Enviar" class="btn font-size-normal padding-standard radius-standard-small">
+            </div>
+        </section>
+    </section>
+
+    <template id="mensaje-template">
+        <div class="mensaje-area">
+            <span class="nombre-usuario font-weight-bold"></span>
+            <div class="mensaje-chat radius-standard-small padding-standard font-size-normal">
+                <span class="contenido-mensaje"></span>
+            </div>
+        </div>
+    </template>
+</body>
+</html>

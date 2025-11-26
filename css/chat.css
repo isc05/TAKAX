@@ -1,0 +1,122 @@
+/* Estilos del chat */
+#panel-chat {
+    align-self: center;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 40%;
+    height: 95vh;
+    border: 2px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    overflow: hidden;
+}
+
+#header-chat {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    /* Añade estas propiedades */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px; /* Añade padding para que no se pegue a los bordes */
+}
+
+#header-chat h1 {
+    margin: 10px 0; /* Mantiene un margen vertical */
+}
+#header-chat #back{
+    background-image: url("/res/icon/arrow-left.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+#clear-chat-btn {
+    /* Usa el color de botón de tu global.css */
+    background-color: var(--button-color); 
+    color: var(--background-color);
+    border: none;
+    cursor: pointer;
+    /* Ajusta el padding si es necesario, aunque .btn ya lo define */
+    padding: 5px 10px; 
+}
+#chat-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Hace que este contenedor llene el espacio en #panel-chat */
+    overflow: hidden; /* Previene desbordes extraños */
+}
+
+#chat {
+    flex-grow: 1; /* Hace que el chat llene el espacio disponible en #chat-container */
+    overflow-y: auto; /* Ya lo tienes */
+    scroll-behavior: smooth; /* Para scroll más suave */
+}
+
+#actions {
+    height: 20%;
+    flex-shrink: 0; /* Evita que el área de "actions" se encoja */
+    min-height: 100px; /* Asegura una altura mínima */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--secondary-color);
+}
+
+#mensaje {
+    border: none;
+    height: 50%;
+    width: 70%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    resize: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary-color) rgba(0, 0, 0, 0);
+}
+
+.mensaje-area {
+    display: block;
+    width: 100%;
+    height: max-content;
+    overflow-y: auto;
+}
+
+.mensaje-chat {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+}
+
+.mensaje-chat.enviado {
+    background-color: var(--line-color);
+    color: var(--background-color);
+    border: 2px solid var(--background-color);
+    float: right;
+}
+
+.mensaje-chat.recibido {
+    background-color: var(--background-color);
+    color: var(--line-color);
+    border: 2px solid var(--line-color);
+    float: left;
+}
+
+.mensaje-area .nombre-usuario {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--line-color);
+    display: block;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}

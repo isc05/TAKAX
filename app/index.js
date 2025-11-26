@@ -1,5 +1,8 @@
-// Este script se ejecuta en app/index.html
-const user = JSON.parse(localStorage.getItem('login_success'));
+import { Auth } from '../js/auth.js';
+
+// 1. Obtener el usuario desde nuestra fuente de verdad (Auth)
+// Auth ya sabe si buscar en sessionStorage (lo correcto) o localStorage
+const user = Auth.obtenerUsuarioActual();
 
 if (!user) {
     // Si no hay nadie logueado, patéalo al login.
@@ -8,15 +11,24 @@ if (!user) {
 
 } else if (user.tipo === 'empresa') {
     // Si es empresa, llévalo a la vista de empresa
-    window.location.href = 'empresas.html';
+    window.location.href = 'app/empresas.html';
 
 } else if (user.tipo === 'centro') {
     // Si es centro, llévalo a la vista de centro
-    window.location.href = 'centros.html';
+    window.location.href = 'app/centros.html';
 
 } else {
     // Fallback por si un usuario viejo no tiene 'tipo'
     alert('Error en tu cuenta. Por favor, inicia sesión de nuevo.');
-    localStorage.removeItem('login_success');
+    Auth.cerrarSesion();
     window.location.href = '../login.html';
 }
+// Listener para detectar cuando se cierra la pestaña
+window.addEventListener('beforeunload', () => {
+    // Si el usuario está logueado, liberamos su candado
+    const user = Auth.obtenerUsuarioActual();
+    if (user) {
+        Auth.desbloquearUsuario(user.email);
+    }
+    // Nota: No borramos sessionStorage, solo el candado de localStorage
+});

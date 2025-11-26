@@ -2,6 +2,7 @@ import { Auth } from './auth.js';
 
 Auth.protegerLogin();
 
+const indexURL = 'index.html';
 // const selectType = document.querySelector('#tipo');
 // selectType.addEventListener('change', (e) => {
 //     const empresaDetalles = document.querySelector('#empresa-detalles');
@@ -79,5 +80,5 @@ signupForm.addEventListener('submit', async (e) => {
     
     // Auto-login
     Auth.iniciarSesion(newUser);
-    window.location.href = 'app/index.html';
+    window.location.href = indexURL;
 });

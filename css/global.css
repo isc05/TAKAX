@@ -33,18 +33,21 @@ body {
 /* Estilos del header */
 .main-header {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100vw;
     align-items: center;
+    justify-content: space-around;
     padding: 1rem 2rem;
     background-color: var(--secondary-color);
     border-bottom: 4px solid var(--line-color);
     color: var(--background-color);
     margin-bottom: 2rem;
-    justify-content: space-around;
 }
 .container-header {
     display: flex;
     align-items: center;
-    width: 33%;
+    width: 100%/3;
 }
 .container-header h2, .container-header img{
     cursor: pointer;
