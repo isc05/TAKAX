@@ -10,7 +10,7 @@
     position: absolute;
     background-color: var(--secondary-color);
     color: var(--background-color);
-    margin-bottom: 2rem;
+    margin-bottom: 10px;
     width: 420px;
     margin-left: 10%;
     padding-top: 1rem;
@@ -219,4 +219,14 @@
     border: 2px solid var(--secondary-color);
     background-image: url("/res/img/Centro-de-reciclaje.jpg");
     margin-top: 1rem;
+}
+
+#mapa-frame {
+    width: 100%;
+    height: 60vh;
+    border: none;
+    border-radius: 10px;
+    display: block; 
+    margin-top: 5px;  
+    margin-bottom: 5px; 
 }

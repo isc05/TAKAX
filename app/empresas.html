@@ -12,6 +12,9 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../js/main_empresa.js" defer></script>
     <script src="../js/map.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.min.css" />
+
+    <script src="https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.min.js"></script>
     <title>TAKAX - Empresas</title>
 </head>
 <body>
@@ -55,6 +58,16 @@
                 <option value="3">3+&#9733;</option>
             </select>
         </div>
+
+        <div class="campo">
+            <button id="aplicar-filtros" class="radius-standard-small btn font-size-small padding-small">Aplicar
+                filtros</button>
+        </div>
+    </section>
+
+    <iframe src="mapa/leaflet/index.html" id="mapa-frame" title="Mapa de Reciclaje"></iframe>
+
+    <div id="results-container"></div>
 
         <!-- Filtro por cercanía (simulado como distancia en km) -->
         <div class="campo">
