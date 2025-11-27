@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../res/icon/logo-takax.png" type="image/x-icon">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <!--Flaticon (eye)-->
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/empresas.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -13,7 +16,6 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script type="module" src="../js/main_empresa.js" defer></script>
     <script type="module" src="close_window.js"></script>
-    <script src="../js/map.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.min.css" />
     <script src="https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.min.js"></script>
     <title>TAKAX - Empresas</title>
@@ -24,10 +26,12 @@
         <div class="container-header">
             <div class="background-logo-header"><img src="../res/icon/logo-takax.png" alt="Logo de TAKAX"
                     class="logo-header" draggable="false"></div>
-            <h1 class="title-header">TAKAX | Empresas</h1>
+            <h2 class="title-header">TAKAX | Empresas</h2>
         </div>
-        <h2 id="user-name-text"></h2>
-        <div class="container-header align-right">
+        <div class="container-header">
+            <h2 id="user-name-text"></h2>
+        </div>
+        <div class="container-header">
             <div class="background-logo-header" id="profile-img"><img src="../res/icon/user.png" alt="Icono de usuario"
                     class="logo-header" draggable="false"></div>
             <h2 id="enterprise-profile">Perfil de empresa</h2>
@@ -44,69 +48,70 @@
         </div>
     </header>
     <main id="main-content">
-        <section class="busqueda-bar">
+        <section class="busqueda-bar" id="search-section">
             <button id="toggle-filtros" class="btn-filtro font-size-high radius-standard padding-standard">Filter
                 ▼</button>
             <input type="text" id="busqueda-nombre" placeholder="Recycling center name..."
                 class="input-busqueda font-size-high radius-standard padding-standard" />
-            <button id="btn-buscar" class="btn font-size-high radius-standard padding-standard">Search</button>
-        </section>
-        <section id="panel-filtros" class="panel-filtros radius-standard padding-standard hidden">
-            <!-- Filtro por rating mínimo -->
-            <div class="campo">
-                <label for="filtro-rating">Rating:</label>
-                <select id="filtro-rating">
-                    <option value="">Todos</option>
-                    <option value="5">5&#9733;</option>
-                    <option value="4.5">4.5+&#9733;</option>
-                    <option value="4">4+&#9733;</option>
-                    <option value="3">3+&#9733;</option>
-                </select>
-            </div>
-            <!-- Filtro por cercanía (simulado como distancia en km) -->
-            <div class="campo">
-                <label for="filtro-distancia">Distancia máxima (km):</label>
-                <input type="number" id="filtro-distancia" min="1" max="20" placeholder="Ej. 10" />
-            </div>
-
-            <!-- Filtro por precio por kilo -->
-            <div class="campo doble">
-                <label>Precio por kilo (MXN):</label>
-                <input type="number" id="precio-min" placeholder="Mínimo" min="0" step="0.1" />
-                <input type="number" id="precio-max" placeholder="Máximo" min="0" step="0.1" />
-            </div>
-
-            <!-- Filtro por tipo de material -->
-            <div class="campo">
-                <label>Materiales aceptados:</label>
-                <div class="checkboxes" id="material">
-                    <label for="plastico"><input type="checkbox" value="plástico" class="material-checkbox"
-                            id="plastico" />
-                        Plástico <img src="../res/icon/plastic.png" alt="plástico"></label>
-                    <label for="carton"><input type="checkbox" value="cartón" class="material-checkbox" id="carton" />
-                        Cartón <img src="../res/icon/cardboard.png" alt="cartón"></label>
-                    <label for="papel"><input type="checkbox" value="papel" class="material-checkbox" id="papel" />
-                        Papel <img src="../res/icon/paper.png" alt="papel"></label>
-                    <label for="aluminio"><input type="checkbox" value="aluminio" class="material-checkbox"
-                            id="aluminio" />
-                        Aluminio <img src="../res/icon/aluminum.png" alt="aluminio"></label>
-                    <label for="vidrio"><input type="checkbox" value="vidrio" class="material-checkbox" id="vidrio" />
-                        Vidrio <img src="../res/icon/glass.png" alt="vidrio"></label>
-                    <label for="baterias"><input type="checkbox" value="baterías" class="material-checkbox"
-                            id="baterias" />
-                        Baterías <img src="../res/icon/battery.png" alt="baterías"></label>
-                    <label for="metales"><input type="checkbox" value="metales" class="material-checkbox" id="metales">
-                        Metales <img src="../res/icon/iron.png" alt="metales"></label>
+            <button id="btn-buscar" class="btn font-size-high radius-standard padding-standard search-centers">Search</button>
+            <section id="panel-filtros" class="panel-filtros radius-standard padding-standard hidden">
+                <!-- Filtro por rating mínimo -->
+                <div class="campo">
+                    <label for="filtro-rating">Rating:</label>
+                    <select id="filtro-rating">
+                        <option value="">Todos</option>
+                        <option value="5">5&#9733;</option>
+                        <option value="4.5">4.5+&#9733;</option>
+                        <option value="4">4+&#9733;</option>
+                        <option value="3">3+&#9733;</option>
+                    </select>
                 </div>
-            </div>
+                <!-- Filtro por cercanía (simulado como distancia en km) -->
+                <div class="campo">
+                    <label for="filtro-distancia">Distancia máxima (km):</label>
+                    <input type="number" id="filtro-distancia" min="1" max="20" placeholder="Ej. 10" />
+                </div>
 
-            <!-- Botón para aplicar filtros -->
-            <div class="campo">
-                <button id="aplicar-filtros" class="radius-standard-small btn font-size-small padding-small">Aplicar
-                    filtros</button>
-            </div>
+                <!-- Filtro por precio por kilo -->
+                <div class="campo doble">
+                    <label>Precio por kilo (MXN):</label>
+                    <input type="number" id="precio-min" placeholder="Mínimo" min="0" step="0.1" />
+                    <input type="number" id="precio-max" placeholder="Máximo" min="0" step="0.1" />
+                </div>
+
+                <!-- Filtro por tipo de material -->
+                <div class="campo">
+                    <label>Materiales aceptados:</label>
+                    <div class="checkboxes" id="material">
+                        <label for="plastico"><input type="checkbox" value="plástico" class="material-checkbox"
+                                id="plastico" />
+                            Plástico <img src="../res/icon/plastic.png" alt="plástico"></label>
+                        <label for="carton"><input type="checkbox" value="cartón" class="material-checkbox"
+                                id="carton" />
+                            Cartón <img src="../res/icon/cardboard.png" alt="cartón"></label>
+                        <label for="papel"><input type="checkbox" value="papel" class="material-checkbox" id="papel" />
+                            Papel <img src="../res/icon/paper.png" alt="papel"></label>
+                        <label for="aluminio"><input type="checkbox" value="aluminio" class="material-checkbox"
+                                id="aluminio" />
+                            Aluminio <img src="../res/icon/aluminum.png" alt="aluminio"></label>
+                        <label for="vidrio"><input type="checkbox" value="vidrio" class="material-checkbox"
+                                id="vidrio" />
+                            Vidrio <img src="../res/icon/glass.png" alt="vidrio"></label>
+                        <label for="baterias"><input type="checkbox" value="baterías" class="material-checkbox"
+                                id="baterias" />
+                            Baterías <img src="../res/icon/battery.png" alt="baterías"></label>
+                        <label for="metales"><input type="checkbox" value="metales" class="material-checkbox"
+                                id="metales">
+                            Metales <img src="../res/icon/iron.png" alt="metales"></label>
+                    </div>
+                </div>
+                <!-- Botón para aplicar filtros -->
+                <div class="campo">
+                    <button id="aplicar-filtros" class="radius-standard-small btn font-size-small padding-small search-centers">Apply</button>
+                </div>
+            </section>
         </section>
-
+        <div id="view-map"><i class="fi fi-sr-eye"></i><span>Ocultar mapa</span></div>
         <iframe src="mapa/leaflet/index.html" id="mapa-frame" title="Mapa de Reciclaje"></iframe>
 
         <div id="results-container"></div>
@@ -170,4 +175,5 @@
         </div>
     </template>
 </body>
+
 </html>

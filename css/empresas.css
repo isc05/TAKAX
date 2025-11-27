@@ -1,4 +1,4 @@
-
+@import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
 /*Estilos del panel de filtros y el botón de filtros*/
 .btn-filtro {
     background-color: var(--secondary-color);
@@ -12,9 +12,8 @@
     color: var(--background-color);
     margin-bottom: 10px;
     width: 420px;
-    margin-left: 10%;
     padding-top: 1rem;
-    top: 180px;
+    top: 25vh;
 }
 .campo label,
 .campo input,
@@ -48,18 +47,37 @@
     margin-bottom: 0.5rem;
     align-items: center;
 }
+/* Estilos para el botón de ocultar mapa*/
+#view-map{
+    display: flex;
+    align-items: center;
+    width: max-content;
+    margin-left: 8vw;
+}
+#view-map:hover{
+    cursor: pointer;
+}
+#view-map i{
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+}
+#view-map span{
+    font-size: 19px;
+    margin-left: 0.5rem;
+}
 /* Estilos de la barra de búsqueda y el botón buscar */
 .busqueda-bar {
     display: flex;
     gap: 1rem;
     align-items: center;
+    justify-content: center;
     margin-bottom: 1rem;
-    margin-left: 20%;
-    margin-right: 20%;
 }
 
 .input-busqueda {
     flex-grow: 1;
+    max-width: 40vw;
     border: 1px solid var(--secondary-color);
     background-color: var(--primary-color);
     color: var(--secondary-color);

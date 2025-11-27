@@ -12,6 +12,10 @@
         "numero": "123",
         "codigoPostal": "74200"
     },
+    "coordenadas": {
+        "lat": 18.9065, 
+        "lng": -98.4289
+    },
     "telefono": "123 456 7890",
     "email": "email1@example.com",
     "rfc": "RFC123456",
@@ -23,7 +27,30 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFC123456",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 300,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFC987654", 
+            "nombreEmpresa": "Alice's Store",
+            "monto": 1500,
+            "fecha": "2023-10-26T14:30:00Z",
+            "concepto": "Venta de Aluminio"
+        },
+        {
+            "rfcEmpresa": "RFC123456",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 500,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        }
+    ]
   },
   {
     "nombre": "Centro 2",
@@ -116,6 +143,10 @@
       "numero": "10.0",
       "codigoPostal": "72990"
     },
+    "coordenadas": {
+        "lat": 19.04352408219428, 
+        "lng": -98.08937459274217
+    },
     "telefono": "222 574 11 05",
     "email": "dimsarecicladora@hotmail.com",
     "rfc": "RFCABC123",
@@ -127,7 +158,23 @@
     "recomendado": true,
     "status": "active",
     "premium": true,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 300,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 500,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        }
+    ]
   },
   {
     "nombre": "Ferrometales Ferrosos y Metales De Oriente",
@@ -142,6 +189,10 @@
       "numero": "110",
       "codigoPostal": "72990"
     },
+    "coordenadas": {
+        "lat": 19.05775009015865, 
+        "lng": -98.10592729204802
+    },
     "telefono": "222 539 69 69",
     "email": "info@ferrometales.com",
     "rfc": "RFC123456",
@@ -153,7 +204,16 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 1000,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        }
+    ]
   },
   {
     "nombre": "Recicladora Upam",
@@ -168,6 +228,10 @@
       "numero": "",
       "codigoPostal": "72499"
     },
+    "coordenadas": {
+        "lat": 18.954451367525238, 
+        "lng": -98.17272059165862
+    },
     "telefono": "222 474 17 28",
     "email": "contacto@recicladoraupam.com",
     "rfc": "RFC789012",
@@ -179,7 +243,30 @@
     "recomendado": false,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 300,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 500,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 800,
+            "fecha": "2023-10-28T11:45:00Z",
+            "concepto": "Venta de Vidrio"
+        }
+    ]
   },
   {
     "nombre": "Reintegra Amozoc de Mota",
@@ -194,6 +281,10 @@
       "numero": "1101",
       "codigoPostal": "72990"
     },
+    "coordenadas": {
+        "lat": 19.066169989660963,
+        "lng": -98.10111152037442
+    },
     "telefono": "222 243 84 33",
     "email": "jmijares@reintegrasur.com",
     "rfc": "RFC112233",
@@ -205,7 +296,16 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 100,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        }
+    ]
   },
   {
     "nombre": "Recicla Electrónica /Recielec",
@@ -220,6 +320,10 @@
       "numero": "",
       "codigoPostal": "72229"
     },
+    "coordenadas": {
+        "lat": 19.0689703263418,
+        "lng": -98.12332398906766
+    },
     "telefono": "221 167 67 39",
     "email": "recicladosdelatorre@hotmail.com",
     "rfc": "RFC222333",
@@ -231,7 +335,30 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 200,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 1000,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 800,
+            "fecha": "2023-10-28T11:45:00Z",
+            "concepto": "Venta de Vidrio"
+        }
+    ]
   },
   {
     "nombre": "Rexa Recicladora",
@@ -246,6 +373,10 @@
       "numero": "4",
       "codigoPostal": "72730"
     },
+    "coordenadas": {
+        "lat": 19.109428, 
+        "lng": -98.2648988
+    },
     "telefono": "558 548 08 75",
     "email": "giovanni@rexa-recicladora.com.mx",
     "rfc": "RFC000111",
@@ -257,7 +388,16 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 1000,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        }
+      ]
   },
   {
     "nombre": "Reciclán",
@@ -272,6 +412,10 @@
       "numero": "8513",
       "codigoPostal": "72480"
     },
+    "coordenadas": {
+        "lat": 19.0624149, 
+        "lng": -98.2940641
+    },
     "telefono": "222 587 84 85",
     "email": "reciclanpuebla@gmail.com",
     "rfc": "RFCTRM340",
@@ -283,7 +427,30 @@
     "recomendado": false,
     "status": "not active",
     "premium": false,
-    "modo": "Ausente"
+    "modo": "Ausente",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 800,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 500,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 800,
+            "fecha": "2023-10-28T11:45:00Z",
+            "concepto": "Venta de Vidrio"
+        }
+    ]
   },
   {
     "nombre": "Reciclacentro Puebla",
@@ -297,6 +464,10 @@
       "calle": "Antiguo Camino A La Resurrección",
       "numero": "10813",
       "codigoPostal": "72228"
+    },
+    "coordenadas": {
+        "lat": 19.0863969, 
+        "lng": -98.1596107
     },
     "telefono": "222 271 30 22",
     "email": "reciclacentropueblapuebla@gmail.com",
@@ -324,6 +495,10 @@
       "numero": "10428",
       "codigoPostal": "72228"
     },
+    "coordenadas": {
+        "lat": 19.0829467,
+        "lng": -98.1601668
+    },
     "telefono": "222 708 41 75",
     "email": "transloba.constructorwebtp.com.mx",
     "rfc": "RFCTLN341",
@@ -349,6 +524,10 @@
       "calle": "Ricardo Flores Magón",
       "numero": "77",
       "codigoPostal": "72100"
+    },
+    "coordenadas": {
+        "lat": 19.0934018, 
+        "lng": -98.2124851
     },
     "telefono": "222 224 49 05",
     "email": "compramaterial@reciclajestalisman.com",
@@ -376,6 +555,10 @@
       "numero": " 98",
       "codigoPostal": "72570"
     },
+    "coordenadas": {
+        "lat": 19.0959855, 
+        "lng": -98.34271
+    },
     "telefono": "221 515 32 28",
     "email": "info@recicladosanjus.com",
     "rfc": "RFCAAE010",
@@ -402,6 +585,10 @@
       "numero": "430",
       "codigoPostal": "72000"
     },
+    "coordenadas": {
+        "lat": 19.0502279, 
+        "lng": -98.1902301
+    },
     "telefono": "222 469 12 12",
     "email": "aramirez.recicladosar@gmail.com",
     "rfc": "RFCSGP880",
@@ -413,7 +600,23 @@
     "recomendado": false,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 400,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 900,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        }
+    ]
   },
   {
     "nombre": "Recicladora San Miguelito",
@@ -428,6 +631,10 @@
       "numero": "1721",
       "codigoPostal": "72090"
     },
+    "coordenadas": {
+        "lat": 19.0573995, 
+        "lng": -98.209455
+    },
     "telefono": "222 196 68 60",
     "email": "informes@reciclasm.com",
     "rfc": "RFCVTB541",
@@ -439,7 +646,23 @@
     "recomendado":false,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 400,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 800,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        }
+    ]
   },
   {
     "nombre": "Recicladora Un Mundo Mejor Tehuacán",
@@ -453,6 +676,10 @@
       "calle": "Avenida Ejército Mexicano",
       "numero": "506",
       "codigoPostal": "75730"
+    },
+    "coordenadas": {
+        "lat": 18.47377784098449, 
+        "lng": -97.38908135978212
     },
     "telefono": "238 211 27 17",
     "email": "tehuacan@recicladoramundomejor.mx",
@@ -480,6 +707,10 @@
       "numero": "40",
       "codigoPostal": "74570"
     },
+    "coordenadas": {
+        "lat": 18.620759296418356, 
+        "lng": -98.47077340365726
+    },
     "telefono": "243 690 06 21",
     "email": "ventas@itzocanrecicladora.com",
     "rfc": "RFCMXP781",
@@ -505,6 +736,10 @@
       "calle": "25 Poniente",
       "numero": "838 A",
       "codigoPostal": "75766"
+    },
+    "coordenadas": {
+        "lat": 18.444326728053703, 
+        "lng": -97.40312033914253
     },
     "telefono": "238 107 33 49",
     "email": "compras@recicladoragama.com",
@@ -532,6 +767,10 @@
       "numero": "4009",
       "codigoPostal": "72410"
     },
+    "coordenadas": {
+        "lat": 18.459593554632445, 
+        "lng": -97.41912409866917
+    },
     "telefono": "238 103 41 86",
     "email": "contacto@grupoavio.mx",
     "rfc": "RFCMFT841",
@@ -558,6 +797,10 @@
       "numero": "610",
       "codigoPostal": "72090"
     },
+    "coordenadas": {
+        "lat": 19.056607876858497, 
+        "lng": -98.21479728963052
+    },
     "telefono": "222 978 49 75",
     "email": "fierrosymetales25norte@gmail.com",
     "rfc": "RFCPQR990",
@@ -569,7 +812,30 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 1000,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 1000,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 800,
+            "fecha": "2023-10-28T11:45:00Z",
+            "concepto": "Venta de Vidrio"
+        }
+    ]
   },
   {
     "nombre": "Deacero Patio Puebla",
@@ -583,6 +849,10 @@
       "calle": "Avenida Mexicali",
       "numero": "1189",
       "codigoPostal": "72230"
+    },
+    "coordenadas": {
+        "lat": 19.08435991280201, 
+        "lng": -98.19323350847397
     },
     "telefono": "222 288 66 47",
     "email": "puebla@deacero.com.mx",
@@ -610,6 +880,10 @@
       "numero": "",
       "codigoPostal": "74120"
     },
+    "coordenadas": {
+        "lat": 19.257819282203418, 
+        "lng": -98.40749821112152
+    },
     "telefono": "248 201 9630",
     "email": "chatarracalderon@hotmail.com",
     "rfc": "RFCHDW760",
@@ -635,6 +909,10 @@
       "calle": "Cuauhtémoc",
       "numero": "14",
       "codigoPostal": "74355"
+    },
+    "coordenadas": {
+        "lat": 18.982346698700162, 
+        "lng": -98.36786200097295
     },
     "telefono": "222 762 85 36",
     "email": "contacto@boc.mx",
@@ -662,6 +940,10 @@
       "numero": "32",
       "codigoPostal": "72219"
     },
+    "coordenadas": {
+        "lat": 19.094571396776313, 
+        "lng": -98.15701069126621
+    },
     "telefono": "221 241 95 80",
     "email": "reciclados@acerosmyj.com",
     "rfc": "RFCNGJ890",
@@ -687,6 +969,10 @@
       "calle": "Avenida Felipe Carrillo Puerto",
       "numero": "513",
       "codigoPostal": "74240"
+    },
+    "coordenadas": {
+        "lat": 18.906654574924946, 
+        "lng": -98.42199507056755
     },
     "telefono": "222 813 7382",
     "email": "reciclamex@live.com.mx",
@@ -714,6 +1000,10 @@
       "numero": "29",
       "codigoPostal": "74360"
     },
+    "coordenadas": {
+        "lat": 18.91717286267174, 
+        "lng": -98.42443686147764
+    },
     "telefono": "2244 448 4219",
     "email": "contacto@recicladoatlixco.com",
     "rfc": "RFC220720",
@@ -740,6 +1030,10 @@
       "numero": "4503",
       "codigoPostal": "74290"
     },
+    "coordenadas": {
+        "lat": 18.886634703027894, 
+        "lng": -98.45306719124048
+    },
     "telefono": "2244 448 4219",
     "email": "reciclaje@recicladoraelclonaje.com",
     "rfc": "RFC220720",
@@ -765,6 +1059,10 @@
       "calle": "Popocatépetl",
       "numero": "",
       "codigoPostal": "74230"
+    },
+    "coordenadas": {
+        "lat": 18.909872138575505, 
+        "lng": -98.4533365719517
     },
     "telefono": "222 813 7382",
     "email": "popo@reciclamex.com",

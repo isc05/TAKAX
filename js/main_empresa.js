@@ -1,4 +1,5 @@
 import { Auth } from './auth.js';
+import { cargarMapa, redimensionarMapa } from './map.js';
 
 // ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
@@ -6,20 +7,20 @@ Auth.protegerPagina();
 // Si llegué aquí es que tengo sesión iniciada, así que marco el territorio de nuevo
 const usuario = Auth.obtenerUsuarioActual();
 if (usuario) {
-    Auth.bloquearUsuario(usuario.email);
+  Auth.bloquearUsuario(usuario.email);
 }
- //sección de prueba - login correcto
+//sección de prueba - login correcto
 const userNameText = document.getElementById("user-name-text");
 const userRoleText = document.getElementById("user-role-text");
 const userName = document.querySelector(".user-name");
 const userEmail = document.querySelector(".user-email");
-    if (usuario) {
-      userRoleText.innerText = `${usuario.clase}`;
-      userNameText.innerText = `Bienvenido: ${usuario.name}`;
-      userName.innerText = `Nombre: ${usuario.name}`;
-      userEmail.innerText = `Correo: ${usuario.email}`;
-    }
-    //console.log("Usuario actual:", usuario);
+if (usuario) {
+  userRoleText.innerText = `${usuario.clase}`;
+  userNameText.innerText = `Bienvenido: ${usuario.name}`;
+  userName.innerText = `Nombre: ${usuario.name}`;
+  userEmail.innerText = `Correo: ${usuario.email}`;
+}
+//console.log("Usuario actual:", usuario);
 // Lógica de la página de empresas - búsqueda y filtros de centros de reciclaje
 import { crearTarjeta } from "./tarjeta.js";
 
@@ -35,7 +36,7 @@ function mostrarResultados(lista) {
   const contenedor = document.getElementById("results-container");
   contenedor.innerHTML = "";
   const listaOrdenada = lista.sort((a, b) => {
-    
+
     // Criterio 1: "recomendado" (true=1, false=0)
     // Ordena recomendados (1) antes que no recomendados (0)
     const critRecomendado = b.recomendado - a.recomendado;
@@ -73,6 +74,7 @@ function obtenerFiltros() {
 }
 
 function aplicarFiltros() {
+  console.log("Aplicando filtros...");
   const f = obtenerFiltros();
 
   const filtrados = centros.filter(c => {
@@ -104,49 +106,121 @@ function poblarDetalles(centro) {
   // (Estos son ejemplos, ajusta los selectores a tu HTML real)
   detallesArea.querySelector("#nombre-centro-det").innerText = centro.nombre;
   detallesArea.querySelector("#telefono-centro-det").innerText = `Teléfono: ${centro.telefono}`;
-  detallesArea.querySelector("#direccion-det").innerText = `📍Dirección: ${centro.direccion.ciudad} ,${centro.direccion.estado}, ${centro.direccion.colonia}, ${centro.direccion.calle} No. ${centro.direccion.numero}, CP: ${centro.direccion.codigoPostal},`;
+  detallesArea.querySelector("#direccion-det").innerText = `📍${centro.direccion.calle}, No. ${centro.direccion.numero}, ${centro.direccion.colonia}, CP. ${centro.direccion.codigoPostal}, ${centro.direccion.ciudad}, ${centro.direccion.estado}, ${centro.direccion.pais}.` || "- Sin dirección";
   detallesArea.querySelector("#rating-det").innerText = centro.rating;
 
+  // LÓGICA DEL MAPA
+  // Verificamos si el centro tiene coordenadas configuradas
+  if (centro.coordenadas) {
+    cargarMapa(
+      centro.coordenadas.lat,
+      centro.coordenadas.lng,
+      `<b>${centro.nombre}</b><br>${centro.direccion.calle}, ${centro.direccion.numero}`
+    );
+  } else {
+    console.warn("Este centro no tiene coordenadas GPS.");
+    // Opcional: Cargar un mapa por defecto en el centro de la ciudad
+    cargarMapa(18.9065, -98.4289, "Ubicación no disponible");
+  }
   // LÓGICA DEL CHAT
-    const btnChat = document.querySelector("#btn-chat-centro");
-    // Eliminamos listeners anteriores clonando el botón (Truco para evitar múltiples clicks)
-    const newBtnChat = btnChat.cloneNode(true);
-    btnChat.parentNode.replaceChild(newBtnChat, btnChat);
-    newBtnChat.addEventListener("click", () => {
-        // Obtenemos el usuario actual para validar
-        const currentUser = Auth.obtenerUsuarioActual();
-        if(!currentUser.rfc) {
-            alert("Error: Tu usuario no tiene un RFC válido para chatear.");
-            return;
-        }
-        // VALIDACIÓN DE RFC DEL CENTRO
-        // Asegúrate de que en centros.json todos tengan "rfc"
-        if(!centro.rfc) {
-            alert("Este centro no tiene un RFC configurado para el chat.");
-            return;
-        }
-        // REDIRECCIÓN AL CHAT
-        // Pasamos el RFC y el Nombre del centro por URL
-        const url = `chat.html?rfc=${encodeURIComponent(centro.rfc)}&name=${encodeURIComponent(centro.nombre)}`;
-        window.location.href = url;
-    });
+  const btnChat = document.querySelector("#btn-chat-centro");
+  // Eliminamos listeners anteriores clonando el botón (Truco para evitar múltiples clicks)
+  const newBtnChat = btnChat.cloneNode(true);
+  btnChat.parentNode.replaceChild(newBtnChat, btnChat);
+  newBtnChat.addEventListener("click", () => {
+    // Obtenemos el usuario actual para validar
+    const currentUser = Auth.obtenerUsuarioActual();
+    if (!currentUser.rfc) {
+      alert("Error: Tu usuario no tiene un RFC válido para chatear.");
+      return;
+    }
+    // VALIDACIÓN DE RFC DEL CENTRO
+    // Asegúrate de que en centros.json todos tengan "rfc"
+    if (!centro.rfc) {
+      alert("Este centro no tiene un RFC configurado para el chat.");
+      return;
+    }
+    // REDIRECCIÓN AL CHAT
+    // Pasamos el RFC y el Nombre del centro por URL
+    const url = `chat.html?rfc=${encodeURIComponent(centro.rfc)}&name=${encodeURIComponent(centro.nombre)}`;
+    window.location.href = url;
+  });
 }
 
-function mostrarUI(){
+function mostrarUI() {
   const UI = document.querySelector(".ui-profile");
   UI.classList.toggle("hidden");
+}
+// Preparar datos para el mapa matemático
+async function enviarDatosAlMapa() {
+  const usuarioActual = Auth.obtenerUsuarioActual();
+  if (!usuarioActual) return;
+  // 1. Obtenemos los centros
+  const res = await fetch("../json/centros.json");
+  const todosLosCentros = await res.json();
+  // 2. Filtramos y sumamos el dinero gastado por ESTA empresa en cada centro
+  const datosParaMapa = [];
+
+  todosLosCentros.forEach(centro => {
+    let totalGastado = 0;
+    // Si el centro tiene historial, sumamos lo que YO gasté
+    if (centro.historialCompras) {
+      const misCompras = centro.historialCompras.filter(compra =>
+        compra.rfcEmpresa === usuarioActual.rfc
+      );
+      // Sumar montos
+      totalGastado = misCompras.reduce((sum, compra) => sum + compra.monto, 0);
+    }
+    // Solo nos importan centros donde haya gastado dinero (Masa > 0)
+    if (centro.coordenadas) {
+      datosParaMapa.push({
+        nombre: centro.nombre,
+        lat: centro.coordenadas.lat,
+        lng: centro.coordenadas.lng,
+        monto: totalGastado // Esta será nuestra "Masa" o "Z"
+      });
+    }
+  });
+  // 3. Enviamos los datos al IFRAME usando postMessage
+  const iframe = document.getElementById("mapa-frame");
+  if (iframe) {
+    // Le enviamos el mensaje al mundo interior del iframe
+    iframe.contentWindow.postMessage({
+      tipo: "DATOS_MATEMATICOS",
+      datos: datosParaMapa
+    }, "*");
+  }
 }
 document.addEventListener("DOMContentLoaded", () => {
   //mostrarResultados(centros);
   cargarDatos();
+  // Eventos de búsqueda y filtros
+  const search = document.querySelectorAll(".search-centers");
+  search.forEach(btn => { btn.addEventListener("click", aplicarFiltros); });
 
-  document.getElementById("btn-buscar").addEventListener("click", aplicarFiltros);
-  document.getElementById("aplicar-filtros").addEventListener("click", aplicarFiltros);
+  const search_section = document.getElementById("search-section");
+  search_section.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      aplicarFiltros();
+    }
+  });
 
   document.getElementById("toggle-filtros").addEventListener("click", () => {
     document.getElementById("panel-filtros").classList.toggle("hidden");
-
   });
+
+  // Ocultar/mostrar mapa
+  // const viewMapBtn = document.getElementById("view-map");
+  // const mapaFrame = document.getElementById("mapa-frame");
+  // viewMapBtn.addEventListener("click", () => {
+  //   mapaFrame.classList.toggle("hidden");
+  //   const span = viewMapBtn.querySelector("span");
+  //   if (mapaFrame.classList.contains("hidden")) {
+  //     span.innerText = "Mostrar mapa";
+  //   } else {
+  //     span.innerText = "Ocultar mapa";
+  //   }
+  // });
   document.getElementById("logout").addEventListener("click", () => {
     Auth.cerrarSesion();
   });
@@ -173,13 +247,19 @@ document.addEventListener("DOMContentLoaded", () => {
         // 5. Muestra la sección de detalles
         detallesArea.classList.remove("hidden");
         mainSection.classList.add("hidden");
+        // Esperamos 200ms a que la animación/transición de CSS termine
+        // y le decimos al mapa que se arregle.
+        setTimeout(() => {
+          redimensionarMapa();
+        }, 500);
       }
     }
   });
+  // Dale un segundo al iframe para que cargue antes de mandar datos
+  setTimeout(enviarDatosAlMapa, 1000);
+
   backBtn.addEventListener("click", () => {
     detallesArea.classList.add("hidden");
     mainSection.classList.remove("hidden");
   });
-
-  
 });

@@ -38,7 +38,7 @@ body {
     width: 100vw;
     align-items: center;
     justify-content: space-around;
-    padding: 1rem 2rem;
+    padding: 1rem;
     background-color: var(--secondary-color);
     border-bottom: 4px solid var(--line-color);
     color: var(--background-color);
@@ -46,15 +46,24 @@ body {
 }
 .container-header {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    width: 100%/3;
+    justify-content: center;
+    width: 30vw;
+}
+.container-header h2{
+    font-size: 1.5rem;
 }
 .container-header h2, .container-header img{
     cursor: pointer;
 }
 .logo-header {
-    height: 60px;
-    width: 60px;
+    min-height: 2.4rem;
+    min-width: 2.4rem;
+    max-height: 3.5rem;
+    max-width: 3.5rem;
+    height: fit-content;
+    width: fit-content;
     align-items: center;
 }
 .background-logo-header{
@@ -66,10 +75,8 @@ body {
     justify-content: center;
     overflow: hidden;
 }
-.title-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 1rem;
+.title-header, #enterprise-profile {
+    margin-left: 0.5rem;
 }
 .ui-profile {
     list-style: none;
@@ -79,7 +86,7 @@ body {
     border: 2px solid var(--secondary-color);
     text-align: left;
     position: absolute;
-    top: 85px;
+    top: 13vh;
     max-width: 350px;
 }
 .ui-profile li {
@@ -143,6 +150,9 @@ body {
     color: var(--background-color);
     border: none;
     cursor: pointer;
+}
+.btn:hover {
+    background-color: rgb(255, 23, 93);
 }
 /* Clases asignables auxiliares de ocultamiento */
 .hidden {
