@@ -188,3 +188,25 @@ function dibujarGradiente(data, foco) {
         }
     }
 }
+/**
+ * Mueve la cámara suavemente hacia una ubicación específica.
+ * Útil para conectar tablas o listas externas con el mapa.
+ */
+export function enfocarCoordenadas(lat, lng) {
+    if (mapaAnalitico) {
+        // Usamos flyTo para una animación cinematográfica
+        // Zoom 16 es lo suficientemente cerca para ver la calle
+        mapaAnalitico.flyTo([lat, lng], 16, { 
+            duration: 1.5,
+            easeLinearity: 0.25
+        });
+        // Abrir un popup temporal
+        L.popup()
+            .setLatLng([lat, lng])
+            .setContent(`📍 Ubicación seleccionada`)
+            .openOn(mapaAnalitico);
+        setTimeout(() => { mapaAnalitico.closePopup(); }, 1600);
+    } else {
+        console.warn("El mapa analítico aún no está inicializado.");
+    }
+}

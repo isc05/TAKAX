@@ -48,13 +48,33 @@
     </header>
     <main id="main-content">
         <section class="panel-mapa radius-standard padding-standard">
-            <div id="view-map"><i class="fi fi-sr-eye"></i><span>Ocultar mapa</span></div>
+            <div id="view-map"><i class="fi fi-sr-eye"></i><span>Ocultar mapa&tabla</span></div>
             <h3 class="font-size-high">Análisis de Mercado y Socios</h3>
             <p>Visualización de densidad de compras y flujo económico.</p>
-            <!-- AQUÍ ESTÁ EL NUEVO CONTENEDOR NATIVO -->
-            <div id="map-analitico"></div>
+            <div class="dashboard-container">
+                <div class="map-wrapper">
+                    <div id="map-analitico"></div>
+                </div>
+                <div class="table-wrapper radius-standard-small" id="tabla-socios">
+                    <h4 class="font-size-normal" style="margin-top:0; border-bottom: 2px solid var(--line-color);">🏆
+                        Top Socios</h4>
+                    <div class="table-scroll">
+                        <table id="tabla-socios">
+                            <thead>
+                                <tr>
+                                    <th>Socio</th>
+                                    <th>Trans.</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </section>
-<section class="busqueda-bar" id="search-section">
+        <section class="busqueda-bar" id="search-section">
             <button id="toggle-filtros" class="btn-filtro font-size-high radius-standard padding-standard">Filter
                 ▼</button>
             <input type="text" id="busqueda-nombre" placeholder="Recycling center name..."

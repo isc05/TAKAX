@@ -1,5 +1,5 @@
 import { Auth } from './auth.js';
-import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico } from './map.js';
+import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico, enfocarCoordenadas} from './map.js';
 
 // ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
@@ -159,34 +159,83 @@ async function calcularDatosMapa() {
     try {
         const res = await fetch("../json/centros.json");
         const todosLosCentros = await res.json();
-        const datosParaMapa = [];
+        const datosAnaliticos = [];
 
         todosLosCentros.forEach(centro => {
             let totalGastado = 0;
+            let totalTransacciones = 0;
+
             if (centro.historialCompras) {
                 const misCompras = centro.historialCompras.filter(compra => 
                     compra.rfcEmpresa === usuarioActual.rfc
                 );
                 totalGastado = misCompras.reduce((sum, c) => sum + c.monto, 0);
+                totalTransacciones = misCompras.length;
             }
 
             if (centro.coordenadas) {
-                datosParaMapa.push({
+                datosAnaliticos.push({
                     nombre: centro.nombre,
                     lat: centro.coordenadas.lat,
                     lng: centro.coordenadas.lng,
-                    monto: totalGastado
+                    monto: totalGastado,
+                    transacciones: totalTransacciones
                 });
             }
         });
 
         // 2. ¡ADIÓS IFRAME! LLAMADA DIRECTA
-        console.log("Inicializando mapa analítico con datos:", datosParaMapa);
-        inicializarMapaAnalitico(datosParaMapa);
+        console.log("Datos analiticos:", datosAnaliticos);
+        inicializarMapaAnalitico(datosAnaliticos);
 
+        renderizarTablaTopSocios(datosAnaliticos);
     } catch (e) {
-        console.error("Error cargando mapa analítico:", e);
+        console.error("Error cargando dashboard:", e);
     }
+}
+// --- NUEVA FUNCIÓN PARA LA TABLA ---
+function renderizarTablaTopSocios(datos) {
+    const tbody = document.querySelector("#tabla-socios tbody");
+    tbody.innerHTML = ""; // Limpiar tabla
+
+    // 1. Filtramos solo los que tienen ventas (> 0)
+    const sociosActivos = datos.filter(d => d.monto > 0);
+
+    if (sociosActivos.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>No hay actividad reciente.</td></tr>";
+        return;
+    }
+    // 2. Ordenamos de mayor a menor monto (Top)
+    sociosActivos.sort((a, b) => b.monto - a.monto);
+
+    // 3. Generamos las filas
+    sociosActivos.forEach(socio => {
+        const fila = document.createElement("tr");
+        fila.style.cursor = "pointer";
+        fila.title = "Ver en el mapa";
+        // Formatear dinero (ej: $1,200.00)
+        const montoFormato = new Intl.NumberFormat('es-MX', { 
+            style: 'currency', currency: 'MXN' 
+        }).format(socio.monto);
+
+        fila.innerHTML = `
+            <td><strong>${socio.nombre}</strong></td>
+            <td style="text-align: center;">${socio.transacciones}</td>
+            <td style="color: var(--secondary-color); font-weight: bold;">${montoFormato}</td>
+        `;
+        // Al hacer clic en la fila, llamamos al mapa
+        fila.addEventListener("click", () => {
+            console.log(`Viajando a: ${socio.nombre}`);
+            enfocarCoordenadas(socio.lat, socio.lng);
+            
+            // (Opcional) Resaltar visualmente la fila seleccionada
+            // Quitamos la clase 'selected' de todas y se la ponemos a esta
+            document.querySelectorAll("#tabla-socios tr").forEach(tr => tr.style.backgroundColor = "");
+            fila.style.backgroundColor = "var(--primary-color)";
+        });
+
+        tbody.appendChild(fila);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -215,17 +264,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const viewMapBtn = document.getElementById("view-map");
   const span = viewMapBtn.querySelector("span");
   const viewIcon = viewMapBtn.querySelector(".fi-sr-eye");
+  const tablaSocios = document.getElementById("tabla-socios");
   viewMapBtn.addEventListener("click", () => {
-    const estaOculto = mapaAnalitico.classList.toggle("hidden");
+    const estaOculto1 = mapaAnalitico.classList.toggle("hidden");
+    const estaOculto2 = tablaSocios.classList.toggle("hidden");
 
-    if (estaOculto) {
+    if (estaOculto1 && estaOculto2) {
         // A) SI SE OCULTÓ:
         viewIcon.style.opacity = "0.5";
-        span.innerText = "Mostrar mapa";
+        span.innerText = "Mostrar mapa&tabla";
     } else {
         // B) SI SE MOSTRÓ:
         viewIcon.style.opacity = "1";
-        span.innerText = "Ocultar mapa";
+        span.innerText = "Ocultar mapa&tabla";
         // --- ¡LA CLAVE DEL ÉXITO! ---
         // Esperamos un instante a que el navegador quite el display:none
         // y le decimos a Leaflet: "¡Despierta, tienes espacio nuevo!"

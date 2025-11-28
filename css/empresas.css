@@ -1,15 +1,6 @@
 @import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
 /*Estilos del mapa (analítico)*/
-#map-analitico {
-    width: 100%;
-    height: 40vh;
-    border: none;
-    border-radius: 10px;
-    display: block; 
-    margin-top: 5px;  
-    margin-bottom: 5px;
-    z-index: 1; 
-}
+
 .panel-mapa{
     display: flex;
     flex-direction: column;
@@ -18,8 +9,96 @@
     border: 1px solid var(--secondary-color);
     background-color: var(--background-color);
     margin: 0 auto 2rem auto;
-    width: 75vw;
+    width: 95%;
+    max-width: 1400px;
     height: max-content;
+    transition: all 0.3s ease;
+}
+/* --- ESTILOS DEL DASHBOARD (Mapa + Tabla) --- */
+
+/* Contenedor Padre */
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap; /* ¡Clave! Si no caben, se apilan */
+    gap: 1.5rem;     /* Espacio entre mapa y tabla */
+    width: 100%;
+    margin-top: 1rem;
+    align-items: stretch; /* Que tengan la misma altura si es posible */
+}
+
+/* El Mapa ocupa más espacio (flex: 2) */
+.map-wrapper {
+    flex: 2 1 300px; /* Crece el doble que la tabla */
+    min-width: 300px; /* No encoger más de esto */
+    display: flex;
+    flex-direction: column;
+}
+
+#map-analitico {
+    flex-grow: 1; /* Que ocupe todo el alto disponible */
+    width: 100%;
+    min-height: 40vh; /* Altura mínima segura */
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    z-index: 1;
+}
+
+/* La Tabla ocupa menos espacio (flex: 1) */
+.table-wrapper {
+    flex: 1 1 280px; /* Crece normalmente */
+    min-width: 280px; /* Si la pantalla es pequeña, bajará */
+    background-color: white; /* O var(--primary-color) si prefieres */
+    border: 1px solid var(--secondary-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-height: 450px; /* Limite de altura para scroll */
+}
+
+/* Estilos de la Tabla */
+.table-scroll {
+    overflow-y: auto; /* Scroll si hay muchos socios */
+    flex-grow: 1;
+}
+
+#tabla-socios {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+#tabla-socios th {
+    text-align: left;
+    padding: 8px;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    position: sticky;
+    top: 0; /* Encabezado fijo al hacer scroll */
+}
+
+#tabla-socios td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+#tabla-socios tbody tr {
+    transition: background-color 0.2s ease;
+}
+#tabla-socios tr:hover {
+    background-color: var(--background-color); /* Efecto hover */
+    cursor: pointer;
+}
+
+/* Ajuste específico para móviles muy pequeños */
+@media (max-width: 600px) {
+    .panel-mapa {
+        width: 95vw; /* Aprovechar más pantalla en móvil */
+        padding: 0.5rem;
+    }
+    #map-analitico {
+        min-height: 300px; /* Mapa un poco más bajo en móvil */
+    }
 }
 /* Para que el contenedor se ajuste suavemente (opcional pero estético) */
 .panel-mapa {
