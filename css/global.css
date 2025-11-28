@@ -88,6 +88,7 @@ body {
     position: absolute;
     top: 13vh;
     max-width: 350px;
+    z-index: 10;
 }
 .ui-profile li {
     padding: 8px 12px;
@@ -156,7 +157,7 @@ body {
 }
 /* Clases asignables auxiliares de ocultamiento */
 .hidden {
-    display: none;
+    display: none !important;
 }
 .invisible {
     visibility: hidden;

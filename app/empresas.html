@@ -41,19 +41,26 @@
                 <li class="user-email"></li>
                 <li>Cambiar contraseña</li>
                 <li>Cambiar datos</li>
-                <li>Historial de transacciones</li>
                 <li class="exception-li-ui"><button class="btn radius-standard-small padding-small" id="logout">Cerrar
                         sesión</button></li>
             </ul>
         </div>
     </header>
     <main id="main-content">
-        <section class="busqueda-bar" id="search-section">
+        <section class="panel-mapa radius-standard padding-standard">
+            <div id="view-map"><i class="fi fi-sr-eye"></i><span>Ocultar mapa</span></div>
+            <h3 class="font-size-high">Análisis de Mercado y Socios</h3>
+            <p>Visualización de densidad de compras y flujo económico.</p>
+            <!-- AQUÍ ESTÁ EL NUEVO CONTENEDOR NATIVO -->
+            <div id="map-analitico"></div>
+        </section>
+<section class="busqueda-bar" id="search-section">
             <button id="toggle-filtros" class="btn-filtro font-size-high radius-standard padding-standard">Filter
                 ▼</button>
             <input type="text" id="busqueda-nombre" placeholder="Recycling center name..."
                 class="input-busqueda font-size-high radius-standard padding-standard" />
-            <button id="btn-buscar" class="btn font-size-high radius-standard padding-standard search-centers">Search</button>
+            <button id="btn-buscar"
+                class="btn font-size-high radius-standard padding-standard search-centers">Search</button>
             <section id="panel-filtros" class="panel-filtros radius-standard padding-standard hidden">
                 <!-- Filtro por rating mínimo -->
                 <div class="campo">
@@ -107,13 +114,11 @@
                 </div>
                 <!-- Botón para aplicar filtros -->
                 <div class="campo">
-                    <button id="aplicar-filtros" class="radius-standard-small btn font-size-small padding-small search-centers">Apply</button>
+                    <button id="aplicar-filtros"
+                        class="radius-standard-small btn font-size-small padding-small search-centers">Apply</button>
                 </div>
             </section>
         </section>
-        <div id="view-map"><i class="fi fi-sr-eye"></i><span>Ocultar mapa</span></div>
-        <iframe src="mapa/leaflet/index.html" id="mapa-frame" title="Mapa de Reciclaje"></iframe>
-
         <div id="results-container"></div>
     </main>
     <section id="detalles" class="hidden">

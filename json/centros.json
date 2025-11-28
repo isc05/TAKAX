@@ -30,27 +30,13 @@
     "modo": "Disponible",
     "historialCompras": [
         {
-            "rfcEmpresa": "RFC123456",
+            "rfcEmpresa": "RFCRFCRFC",
             "nombreEmpresa": "Empresa 1", 
-            "monto": 300,
+            "monto": 1300,
             "fecha": "2023-10-25T10:00:00Z",
             "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFC987654", 
-            "nombreEmpresa": "Alice's Store",
-            "monto": 1500,
-            "fecha": "2023-10-26T14:30:00Z",
-            "concepto": "Venta de Aluminio"
-        },
-        {
-            "rfcEmpresa": "RFC123456",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 500,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
         }
-    ]
+      ]
   },
   {
     "nombre": "Centro 2",
@@ -65,6 +51,10 @@
         "numero": "123",
         "codigoPostal": "74200"
     },
+    "coordenadas":{
+      "lat": 18.902389538709375,
+      "lng": -98.44002169845201
+    },
     "telefono": "123 456 7890",
     "email": "email2@example.com",
     "rfc": "RFC234567",
@@ -76,7 +66,16 @@
     "recomendado": true,
     "status": "active",
     "premium": true,
-    "modo": "Ocupado"
+    "modo": "Ocupado",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 3480,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de plástico"
+        }
+      ]
   },
   {
     "nombre": "Centro 3",
@@ -158,23 +157,7 @@
     "recomendado": true,
     "status": "active",
     "premium": true,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 300,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 500,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Ferrometales Ferrosos y Metales De Oriente",
@@ -204,16 +187,7 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 1000,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Recicladora Upam",
@@ -243,30 +217,7 @@
     "recomendado": false,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 300,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 500,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 800,
-            "fecha": "2023-10-28T11:45:00Z",
-            "concepto": "Venta de Vidrio"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Reintegra Amozoc de Mota",
@@ -296,16 +247,7 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 100,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Recicla Electrónica /Recielec",
@@ -335,30 +277,7 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 200,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 1000,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 800,
-            "fecha": "2023-10-28T11:45:00Z",
-            "concepto": "Venta de Vidrio"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Rexa Recicladora",
@@ -388,16 +307,7 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 1000,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        }
-      ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Reciclán",
@@ -427,30 +337,7 @@
     "recomendado": false,
     "status": "not active",
     "premium": false,
-    "modo": "Ausente",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 800,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 500,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 800,
-            "fecha": "2023-10-28T11:45:00Z",
-            "concepto": "Venta de Vidrio"
-        }
-    ]
+    "modo": "Ausente"
   },
   {
     "nombre": "Reciclacentro Puebla",
@@ -600,23 +487,7 @@
     "recomendado": false,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 400,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 900,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Recicladora San Miguelito",
@@ -646,23 +517,7 @@
     "recomendado":false,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 400,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 800,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Recicladora Un Mundo Mejor Tehuacán",
@@ -812,30 +667,7 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible",
-    "historialCompras": [
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1", 
-            "monto": 1000,
-            "fecha": "2023-10-25T10:00:00Z",
-            "concepto": "Venta de Cartón"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 1000,
-            "fecha": "2023-10-27T09:15:00Z",
-            "concepto": "Venta de Plástico"
-        },
-        {
-            "rfcEmpresa": "RFCRFCRFC",
-            "nombreEmpresa": "Empresa 1",
-            "monto": 800,
-            "fecha": "2023-10-28T11:45:00Z",
-            "concepto": "Venta de Vidrio"
-        }
-    ]
+    "modo": "Disponible"
   },
   {
     "nombre": "Deacero Patio Puebla",
@@ -985,7 +817,16 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 1000,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        }
+    ]
   },
   {
     "nombre": "La Gran Bodega del Reciclado Atlixco",
@@ -1015,7 +856,16 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 862,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        }
+    ]
   },
   {
     "nombre": "Recicladora El Clonaje",
@@ -1045,7 +895,23 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 800,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 1400,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        }
+    ]
   },
   {
     "nombre": "RECICLAMEX EL POPO",
@@ -1075,6 +941,22 @@
     "recomendado": true,
     "status": "active",
     "premium": false,
-    "modo": "Disponible"
+    "modo": "Disponible",
+    "historialCompras": [
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1", 
+            "monto": 780,
+            "fecha": "2023-10-25T10:00:00Z",
+            "concepto": "Venta de Cartón"
+        },
+        {
+            "rfcEmpresa": "RFCRFCRFC",
+            "nombreEmpresa": "Empresa 1",
+            "monto": 208,
+            "fecha": "2023-10-27T09:15:00Z",
+            "concepto": "Venta de Plástico"
+        }
+    ]
   }
 ]

@@ -1,5 +1,5 @@
 import { Auth } from './auth.js';
-import { cargarMapa, redimensionarMapa } from './map.js';
+import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico } from './map.js';
 
 // ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
@@ -151,49 +151,51 @@ function mostrarUI() {
   const UI = document.querySelector(".ui-profile");
   UI.classList.toggle("hidden");
 }
-// Preparar datos para el mapa matemático
-async function enviarDatosAlMapa() {
-  const usuarioActual = Auth.obtenerUsuarioActual();
-  if (!usuarioActual) return;
-  // 1. Obtenemos los centros
-  const res = await fetch("../json/centros.json");
-  const todosLosCentros = await res.json();
-  // 2. Filtramos y sumamos el dinero gastado por ESTA empresa en cada centro
-  const datosParaMapa = [];
 
-  todosLosCentros.forEach(centro => {
-    let totalGastado = 0;
-    // Si el centro tiene historial, sumamos lo que YO gasté
-    if (centro.historialCompras) {
-      const misCompras = centro.historialCompras.filter(compra =>
-        compra.rfcEmpresa === usuarioActual.rfc
-      );
-      // Sumar montos
-      totalGastado = misCompras.reduce((sum, compra) => sum + compra.monto, 0);
+async function calcularDatosMapa() {
+    const usuarioActual = Auth.obtenerUsuarioActual();
+    if (!usuarioActual) return;
+
+    try {
+        const res = await fetch("../json/centros.json");
+        const todosLosCentros = await res.json();
+        const datosParaMapa = [];
+
+        todosLosCentros.forEach(centro => {
+            let totalGastado = 0;
+            if (centro.historialCompras) {
+                const misCompras = centro.historialCompras.filter(compra => 
+                    compra.rfcEmpresa === usuarioActual.rfc
+                );
+                totalGastado = misCompras.reduce((sum, c) => sum + c.monto, 0);
+            }
+
+            if (centro.coordenadas) {
+                datosParaMapa.push({
+                    nombre: centro.nombre,
+                    lat: centro.coordenadas.lat,
+                    lng: centro.coordenadas.lng,
+                    monto: totalGastado
+                });
+            }
+        });
+
+        // 2. ¡ADIÓS IFRAME! LLAMADA DIRECTA
+        console.log("Inicializando mapa analítico con datos:", datosParaMapa);
+        inicializarMapaAnalitico(datosParaMapa);
+
+    } catch (e) {
+        console.error("Error cargando mapa analítico:", e);
     }
-    // Solo nos importan centros donde haya gastado dinero (Masa > 0)
-    if (centro.coordenadas) {
-      datosParaMapa.push({
-        nombre: centro.nombre,
-        lat: centro.coordenadas.lat,
-        lng: centro.coordenadas.lng,
-        monto: totalGastado // Esta será nuestra "Masa" o "Z"
-      });
-    }
-  });
-  // 3. Enviamos los datos al IFRAME usando postMessage
-  const iframe = document.getElementById("mapa-frame");
-  if (iframe) {
-    // Le enviamos el mensaje al mundo interior del iframe
-    iframe.contentWindow.postMessage({
-      tipo: "DATOS_MATEMATICOS",
-      datos: datosParaMapa
-    }, "*");
-  }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   //mostrarResultados(centros);
   cargarDatos();
+
+  calcularDatosMapa();
+  const mapaAnalitico = document.getElementById("map-analitico");
+
   // Eventos de búsqueda y filtros
   const search = document.querySelectorAll(".search-centers");
   search.forEach(btn => { btn.addEventListener("click", aplicarFiltros); });
@@ -210,17 +212,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Ocultar/mostrar mapa
-  // const viewMapBtn = document.getElementById("view-map");
-  // const mapaFrame = document.getElementById("mapa-frame");
-  // viewMapBtn.addEventListener("click", () => {
-  //   mapaFrame.classList.toggle("hidden");
-  //   const span = viewMapBtn.querySelector("span");
-  //   if (mapaFrame.classList.contains("hidden")) {
-  //     span.innerText = "Mostrar mapa";
-  //   } else {
-  //     span.innerText = "Ocultar mapa";
-  //   }
-  // });
+  const viewMapBtn = document.getElementById("view-map");
+  const span = viewMapBtn.querySelector("span");
+  const viewIcon = viewMapBtn.querySelector(".fi-sr-eye");
+  viewMapBtn.addEventListener("click", () => {
+    const estaOculto = mapaAnalitico.classList.toggle("hidden");
+
+    if (estaOculto) {
+        // A) SI SE OCULTÓ:
+        viewIcon.style.opacity = "0.5";
+        span.innerText = "Mostrar mapa";
+    } else {
+        // B) SI SE MOSTRÓ:
+        viewIcon.style.opacity = "1";
+        span.innerText = "Ocultar mapa";
+        // --- ¡LA CLAVE DEL ÉXITO! ---
+        // Esperamos un instante a que el navegador quite el display:none
+        // y le decimos a Leaflet: "¡Despierta, tienes espacio nuevo!"
+        setTimeout(() => {
+            redimensionarMapa(); 
+        }, 100); 
+    }
+   });
+  // Logout
   document.getElementById("logout").addEventListener("click", () => {
     Auth.cerrarSesion();
   });
@@ -255,11 +269,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  // Dale un segundo al iframe para que cargue antes de mandar datos
-  setTimeout(enviarDatosAlMapa, 1000);
 
   backBtn.addEventListener("click", () => {
     detallesArea.classList.add("hidden");
     mainSection.classList.remove("hidden");
+    if (mapaAnalitico) {
+      setTimeout(() => {
+      redimensionarMapa();
+    }, 100);
+    }
   });
 });

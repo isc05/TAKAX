@@ -1,4 +1,54 @@
 @import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
+/*Estilos del mapa (analítico)*/
+#map-analitico {
+    width: 100%;
+    height: 40vh;
+    border: none;
+    border-radius: 10px;
+    display: block; 
+    margin-top: 5px;  
+    margin-bottom: 5px;
+    z-index: 1; 
+}
+.panel-mapa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--background-color);
+    margin: 0 auto 2rem auto;
+    width: 75vw;
+    height: max-content;
+}
+/* Para que el contenedor se ajuste suavemente (opcional pero estético) */
+.panel-mapa {
+    transition: all 0.3s ease;
+}
+.panel-mapa h3, .panel-mapa p{
+    margin-top: 0;
+}
+/* Estilos para el botón de ocultar mapa*/
+#view-map{
+    display: flex;
+    position: absolute;
+    align-self: flex-start;
+    top: 22vh;
+    align-items: center;
+    width: max-content;
+}
+#view-map:hover{
+    cursor: pointer;
+}
+#view-map i{
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+}
+#view-map span{
+    font-size: 19px;
+    margin-left: 0.5rem;
+}
 /*Estilos del panel de filtros y el botón de filtros*/
 .btn-filtro {
     background-color: var(--secondary-color);
@@ -10,10 +60,11 @@
     position: absolute;
     background-color: var(--secondary-color);
     color: var(--background-color);
-    margin-bottom: 10px;
+    margin-top: 45px;
     width: 420px;
     padding-top: 1rem;
-    top: 25vh;
+    /*top: 25vh;*/
+    transform: translateX(-50%);
 }
 .campo label,
 .campo input,
@@ -47,30 +98,11 @@
     margin-bottom: 0.5rem;
     align-items: center;
 }
-/* Estilos para el botón de ocultar mapa*/
-#view-map{
-    display: flex;
-    align-items: center;
-    width: max-content;
-    margin-left: 8vw;
-}
-#view-map:hover{
-    cursor: pointer;
-}
-#view-map i{
-    display: flex;
-    font-size: 30px;
-    align-items: center;
-}
-#view-map span{
-    font-size: 19px;
-    margin-left: 0.5rem;
-}
 /* Estilos de la barra de búsqueda y el botón buscar */
 .busqueda-bar {
     display: flex;
     gap: 1rem;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     margin-bottom: 1rem;
 }
@@ -237,14 +269,4 @@
     border: 2px solid var(--secondary-color);
     background-image: url("/res/img/Centro-de-reciclaje.jpg");
     margin-top: 1rem;
-}
-
-#mapa-frame {
-    width: 100%;
-    height: 60vh;
-    border: none;
-    border-radius: 10px;
-    display: block; 
-    margin-top: 5px;  
-    margin-bottom: 5px; 
 }
