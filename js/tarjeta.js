@@ -18,9 +18,9 @@ export function crearTarjeta(centro) {
     clone.querySelector(".clase").textContent = centro.clase;
     if (centro && centro.direccion) {
         clone.querySelector(".direccion").textContent = centro.direccion.calle + ", No. " +
-            centro.direccion.numero +
+            centro.direccion.numero + ", "+
             centro.direccion.colonia + ", CP. " +
-            centro.direccion.codigoPostal +
+            centro.direccion.codigoPostal + ", "+
             centro.direccion.ciudad + ", " +
             centro.direccion.estado + "," +
             centro.direccion.pais +".";

@@ -210,3 +210,175 @@ export function enfocarCoordenadas(lat, lng) {
         console.warn("El mapa analítico aún no está inicializado.");
     }
 }
+/**
+ * Realiza los cálculos de cálculo vectorial.
+ * 1. Densidad en el punto (Socio Top).
+ * 2. Gradiente en el punto.
+ * 3. Valor promedio en la región (Integral Doble).
+ */
+// ==========================================
+// MOTOR DE ÁLGEBRA LINEAL (Regresión Múltiple)
+// ==========================================
+// Resuelve Ax = b usando Eliminación Gaussiana
+function resolverSistemaLineal(A, b) {
+    const n = A.length;
+    // Combinar A y b en una matriz aumentada
+    const M = A.map((row, i) => [...row, b[i]]);
+
+    for (let i = 0; i < n; i++) {
+        // Pivotaje
+        let maxRow = i;
+        for (let k = i + 1; k < n; k++) {
+            if (Math.abs(M[k][i]) > Math.abs(M[maxRow][i])) maxRow = k;
+        }
+        [M[i], M[maxRow]] = [M[maxRow], M[i]];
+
+        // Hacer ceros abajo
+        for (let k = i + 1; k < n; k++) {
+            const factor = M[k][i] / M[i][i];
+            for (let j = i; j <= n; j++) {
+                M[k][j] -= factor * M[i][j];
+            }
+        }
+    }
+
+    // Sustitución hacia atrás
+    const x = new Array(n).fill(0);
+    for (let i = n - 1; i >= 0; i--) {
+        let sum = 0;
+        for (let j = i + 1; j < n; j++) {
+            sum += M[i][j] * x[j];
+        }
+        x[i] = (M[i][n] - sum) / M[i][i];
+    }
+    return x;
+}
+export function calcularMetricasRegion(datos, centroFoco) {
+    if (!centroFoco || !datos.length) return null;
+
+    const RADIO_REGION_KM = 2.7;
+    
+    // Factores de conversión (Aprox para Puebla/Atlixco)
+    const factorLatKm = 110.57; 
+    const factorLngKm = 111.32 * Math.cos(centroFoco.lat * (Math.PI / 180));
+
+    // --- PASO 0: FILTRADO DE DATOS (CRÍTICO) ---
+    // Solo aceptamos centros que:
+    // 1. Tengan ventas reales (monto > 0)
+    // 2. Estén dentro del radio de análisis (Cercanía)
+    
+    const datosFiltrados = datos.filter(c => {
+        // Filtro Económico
+        if (c.monto <= 0) return false;
+
+        // Filtro Espacial (Distancia)
+        const dx = (c.lng - centroFoco.lng) * factorLngKm;
+        const dy = (c.lat - centroFoco.lat) * factorLatKm;
+        const distanciaKm = Math.sqrt(dx*dx + dy*dy);
+
+        return distanciaKm <= RADIO_REGION_KM;
+    });
+
+    console.log(`Puntos válidos para regresión: ${datosFiltrados.length}`);
+
+    if (datosFiltrados.length < 3) {
+        console.warn("⚠️ Muy pocos puntos para una regresión polinómica fiable.");
+        // Retornamos valores seguros para no romper la UI
+        return { densidad: centroFoco.monto, gradiente: {x:0, y:0, magnitud:0}, promedio: centroFoco.monto, radio: RADIO_REGION_KM };
+    }
+
+    // --- 1. TRANSFORMACIÓN (Usando SOLO datosFiltrados) ---
+    const puntos = datosFiltrados.map(c => {
+        return {
+            nombre: c.nombre, 
+            x: (c.lng - centroFoco.lng) * factorLngKm, 
+            y: (c.lat - centroFoco.lat) * factorLatKm, 
+            z: c.monto 
+        };
+    });
+
+    // --- DEBUGGING ---
+    console.group("🧪 Datos Filtrados para Regresión");
+    console.table(puntos);
+    console.groupEnd();
+
+    // 2. CONSTRUIR MATRICES (Mínimos Cuadrados)
+    const N_COEFFS = 6;
+    const XtX = Array(N_COEFFS).fill(0).map(() => Array(N_COEFFS).fill(0));
+    const XtY = Array(N_COEFFS).fill(0);
+
+    puntos.forEach(p => {
+        const row = [1, p.x, p.y, p.x*p.x, p.y*p.y, p.x*p.y];
+        for (let i = 0; i < N_COEFFS; i++) {
+            XtY[i] += row[i] * p.z;
+            for (let j = 0; j < N_COEFFS; j++) {
+                XtX[i][j] += row[i] * row[j];
+            }
+        }
+    });
+
+    // 3. RESOLVER SISTEMA
+    const coeffs = resolverSistemaLineal(XtX, XtY); 
+    const [A, B, C, D, E, F] = coeffs;
+
+    console.log("📊 Coeficientes Finales:", { A, B, C, D, E, F });
+
+    // 4. CÁLCULOS FINALES
+
+    // A. Densidad y Gradiente
+    const densidadCentro = A;
+    const gradX = B;
+    const gradY = C;
+    const magnitudGradiente = Math.sqrt(gradX*gradX + gradY*gradY);
+
+    // B. Promedio en región (CÁLCULO EXACTO: Volumen / Área Geométrica)
+    // Definimos la región
+    const R = RADIO_REGION_KM; // 2.7 km
+    
+    const PASO = 0.01; // Paso de integración (km)
+    
+    // Área de cada diferencial (dA = dx * dy)
+    // Esto es cuánto mide la base de cada "columna" de la integral en km2
+    const AREA_DIFERENCIAL = PASO * PASO; 
+
+    let volumenTotal = 0; // Suma de (Altura * dA)
+
+    for (let x = -R; x <= R; x += PASO) {
+        for (let y = -R; y <= R; y += PASO) {
+            
+            // Si está dentro del círculo
+            if ((x*x + y*y) <= (R*R)) {
+                
+                // Evaluamos el polinomio (Altura Z)
+                let val = A + (B*x) + (C*y) + (D*x*x) + (E*y*y) + (F*x*y);
+
+                // Restricción de Suelo (Economía no negativa)
+                if (val < 0) val = 0; 
+
+                // 2. SUMA DE RIEMANN (VOLUMEN)
+                // En lugar de sumar solo 'val', sumamos el volumen de la columna
+                // Volumen += Altura ($) * Base (km2)
+                volumenTotal += val * AREA_DIFERENCIAL;
+            }
+        }
+    }
+
+    // 3. DIVISIÓN EXACTA
+    const areaGeometrica = Math.PI * R * R; // ~22.9022 km2
+    
+    // Promedio = Volumen ($ * km2) / Area (km2) = $
+    const promedioRegion = volumenTotal / areaGeometrica;
+
+    console.log(`📊 Reporte Integral:
+    - Radio: ${R} km
+    - Área Base (Exacta): ${areaGeometrica.toFixed(4)} km²
+    - Volumen Total (Integral): ${volumenTotal.toFixed(2)}
+    - Promedio Final: ${promedioRegion.toFixed(2)}`);
+
+    return {
+        densidad: densidadCentro,
+        gradiente: { x: gradX, y: gradY, magnitud: magnitudGradiente },
+        promedio: promedioRegion,
+        radio: R
+    };
+}

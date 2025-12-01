@@ -1,5 +1,5 @@
 import { Auth } from './auth.js';
-import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico, enfocarCoordenadas} from './map.js';
+import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico, enfocarCoordenadas, calcularMetricasRegion } from './map.js';
 
 // ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
@@ -152,90 +152,110 @@ function mostrarUI() {
   UI.classList.toggle("hidden");
 }
 
+let datosCacheados = null;
+let socioTopCacheado = null;
 async function calcularDatosMapa() {
-    const usuarioActual = Auth.obtenerUsuarioActual();
-    if (!usuarioActual) return;
+  const usuarioActual = Auth.obtenerUsuarioActual();
+  if (!usuarioActual) return;
 
-    try {
-        const res = await fetch("../json/centros.json");
-        const todosLosCentros = await res.json();
-        const datosAnaliticos = [];
+  try {
+    const res = await fetch("../json/centros.json");
+    const todosLosCentros = await res.json();
+    const datosAnaliticos = [];
 
-        todosLosCentros.forEach(centro => {
-            let totalGastado = 0;
-            let totalTransacciones = 0;
+    todosLosCentros.forEach(centro => {
+      let totalGastado = 0;
+      let totalTransacciones = 0;
 
-            if (centro.historialCompras) {
-                const misCompras = centro.historialCompras.filter(compra => 
-                    compra.rfcEmpresa === usuarioActual.rfc
-                );
-                totalGastado = misCompras.reduce((sum, c) => sum + c.monto, 0);
-                totalTransacciones = misCompras.length;
-            }
+      if (centro.historialCompras) {
+        const misCompras = centro.historialCompras.filter(compra =>
+          compra.rfcEmpresa === usuarioActual.rfc
+        );
+        totalGastado = misCompras.reduce((sum, c) => sum + c.monto, 0);
+        totalTransacciones = misCompras.length;
+      }
 
-            if (centro.coordenadas) {
-                datosAnaliticos.push({
-                    nombre: centro.nombre,
-                    lat: centro.coordenadas.lat,
-                    lng: centro.coordenadas.lng,
-                    monto: totalGastado,
-                    transacciones: totalTransacciones
-                });
-            }
+      if (centro.coordenadas) {
+        datosAnaliticos.push({
+          nombre: centro.nombre,
+          lat: centro.coordenadas.lat,
+          lng: centro.coordenadas.lng,
+          monto: totalGastado,
+          transacciones: totalTransacciones
         });
+      }
+    });
 
-        // 2. ¡ADIÓS IFRAME! LLAMADA DIRECTA
-        console.log("Datos analiticos:", datosAnaliticos);
-        inicializarMapaAnalitico(datosAnaliticos);
+    console.log("Datos analiticos:", datosAnaliticos);
+    inicializarMapaAnalitico(datosAnaliticos);
 
-        renderizarTablaTopSocios(datosAnaliticos);
-    } catch (e) {
-        console.error("Error cargando dashboard:", e);
+    renderizarTablaTopSocios(datosAnaliticos);
+
+    // --- CÓDIGO NUEVO PARA EL BOTÓN ---
+    const btnCalculos = document.getElementById("btn-ver-calculos");
+
+    // Encontrar al socio top (el de mayor monto)
+    const sociosConVentas = datosAnaliticos.filter(d => d.monto > 0);
+
+    if (sociosConVentas.length > 0) {
+      const socioTop = sociosConVentas.reduce((max, c) => (c.monto > max.monto) ? c : max, sociosConVentas[0]);
+
+      // Guardamos en memoria para usar al dar clic
+      datosCacheados = datosAnaliticos;
+      socioTopCacheado = socioTop;
+
+      // Mostrar botón
+      btnCalculos.classList.remove("hidden");
+    } else {
+      btnCalculos.classList.add("hidden");
     }
+  } catch (e) {
+    console.error("Error cargando dashboard:", e);
+  }
 }
 // --- NUEVA FUNCIÓN PARA LA TABLA ---
 function renderizarTablaTopSocios(datos) {
-    const tbody = document.querySelector("#tabla-socios tbody");
-    tbody.innerHTML = ""; // Limpiar tabla
+  const tbody = document.querySelector("#tabla-socios tbody");
+  tbody.innerHTML = ""; // Limpiar tabla
 
-    // 1. Filtramos solo los que tienen ventas (> 0)
-    const sociosActivos = datos.filter(d => d.monto > 0);
+  // 1. Filtramos solo los que tienen ventas (> 0)
+  const sociosActivos = datos.filter(d => d.monto > 0);
 
-    if (sociosActivos.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>No hay actividad reciente.</td></tr>";
-        return;
-    }
-    // 2. Ordenamos de mayor a menor monto (Top)
-    sociosActivos.sort((a, b) => b.monto - a.monto);
+  if (sociosActivos.length === 0) {
+    tbody.innerHTML = "<tr><td colspan='3' style='text-align:center'>No hay actividad reciente.</td></tr>";
+    return;
+  }
+  // 2. Ordenamos de mayor a menor monto (Top)
+  sociosActivos.sort((a, b) => b.monto - a.monto);
 
-    // 3. Generamos las filas
-    sociosActivos.forEach(socio => {
-        const fila = document.createElement("tr");
-        fila.style.cursor = "pointer";
-        fila.title = "Ver en el mapa";
-        // Formatear dinero (ej: $1,200.00)
-        const montoFormato = new Intl.NumberFormat('es-MX', { 
-            style: 'currency', currency: 'MXN' 
-        }).format(socio.monto);
+  // 3. Generamos las filas
+  sociosActivos.forEach(socio => {
+    const fila = document.createElement("tr");
+    fila.style.cursor = "pointer";
+    fila.title = "Ver en el mapa";
+    // Formatear dinero (ej: $1,200.00)
+    const montoFormato = new Intl.NumberFormat('es-MX', {
+      style: 'currency', currency: 'MXN'
+    }).format(socio.monto);
 
-        fila.innerHTML = `
+    fila.innerHTML = `
             <td><strong>${socio.nombre}</strong></td>
             <td style="text-align: center;">${socio.transacciones}</td>
             <td style="color: var(--secondary-color); font-weight: bold;">${montoFormato}</td>
         `;
-        // Al hacer clic en la fila, llamamos al mapa
-        fila.addEventListener("click", () => {
-            console.log(`Viajando a: ${socio.nombre}`);
-            enfocarCoordenadas(socio.lat, socio.lng);
-            
-            // (Opcional) Resaltar visualmente la fila seleccionada
-            // Quitamos la clase 'selected' de todas y se la ponemos a esta
-            document.querySelectorAll("#tabla-socios tr").forEach(tr => tr.style.backgroundColor = "");
-            fila.style.backgroundColor = "var(--primary-color)";
-        });
+    // Al hacer clic en la fila, llamamos al mapa
+    fila.addEventListener("click", () => {
+      console.log(`Viajando a: ${socio.nombre}`);
+      enfocarCoordenadas(socio.lat, socio.lng);
 
-        tbody.appendChild(fila);
+      // (Opcional) Resaltar visualmente la fila seleccionada
+      // Quitamos la clase 'selected' de todas y se la ponemos a esta
+      document.querySelectorAll("#tabla-socios tr").forEach(tr => tr.style.backgroundColor = "");
+      fila.style.backgroundColor = "var(--primary-color)";
     });
+
+    tbody.appendChild(fila);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -270,21 +290,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const estaOculto2 = tablaSocios.classList.toggle("hidden");
 
     if (estaOculto1 && estaOculto2) {
-        // A) SI SE OCULTÓ:
-        viewIcon.style.opacity = "0.5";
-        span.innerText = "Mostrar mapa&tabla";
+      // A) SI SE OCULTÓ:
+      viewIcon.style.opacity = "0.5";
+      span.innerText = "Mostrar mapa&tabla";
     } else {
-        // B) SI SE MOSTRÓ:
-        viewIcon.style.opacity = "1";
-        span.innerText = "Ocultar mapa&tabla";
-        // --- ¡LA CLAVE DEL ÉXITO! ---
-        // Esperamos un instante a que el navegador quite el display:none
-        // y le decimos a Leaflet: "¡Despierta, tienes espacio nuevo!"
-        setTimeout(() => {
-            redimensionarMapa(); 
-        }, 100); 
+      // B) SI SE MOSTRÓ:
+      viewIcon.style.opacity = "1";
+      span.innerText = "Ocultar mapa&tabla";
+      // --- ¡LA CLAVE DEL ÉXITO! ---
+      // Esperamos un instante a que el navegador quite el display:none
+      // y le decimos a Leaflet: "¡Despierta, tienes espacio nuevo!"
+      setTimeout(() => {
+        redimensionarMapa();
+      }, 100);
     }
-   });
+  });
   // Logout
   document.getElementById("logout").addEventListener("click", () => {
     Auth.cerrarSesion();
@@ -321,13 +341,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // LÓGICA DEL MODAL MATEMÁTICO
+    const btnVerCalculos = document.getElementById("btn-ver-calculos");
+    const modal = document.getElementById("modal-calculos");
+    const btnCerrarModal = document.getElementById("btn-cerrar-modal");
+
+    btnVerCalculos.addEventListener("click", () => {
+        if (datosCacheados && socioTopCacheado) {
+            // 1. Ejecutar las Matemáticas Pesadas
+            const resultados = calcularMetricasRegion(datosCacheados, socioTopCacheado);
+
+            // 2. Llenar el HTML del Modal
+            document.getElementById("math-nombre-socio").textContent = socioTopCacheado.nombre;
+
+            // Formateo de números para que se vean científicos pero legibles
+            document.getElementById("res-densidad").textContent = resultados.densidad.toFixed(2);
+            document.getElementById("res-gradiente").textContent = resultados.gradiente.magnitud.toFixed(2);
+            document.getElementById("res-promedio").textContent = `$ ${resultados.promedio.toFixed(2)}`;
+
+            // 3. Mostrar Modal
+            modal.classList.remove("hidden");
+        }
+    });
+
+    // Cerrar Modal
+    btnCerrarModal.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+
+    // Cerrar si clic afuera
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.add("hidden");
+    });
+
   backBtn.addEventListener("click", () => {
     detallesArea.classList.add("hidden");
     mainSection.classList.remove("hidden");
     if (mapaAnalitico) {
       setTimeout(() => {
-      redimensionarMapa();
-    }, 100);
+        redimensionarMapa();
+      }, 100);
     }
   });
 });

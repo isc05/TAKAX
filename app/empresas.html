@@ -49,15 +49,22 @@
     <main id="main-content">
         <section class="panel-mapa radius-standard padding-standard">
             <div id="view-map"><i class="fi fi-sr-eye"></i><span>Ocultar mapa&tabla</span></div>
-            <h3 class="font-size-high">Análisis de Mercado y Socios</h3>
-            <p>Visualización de densidad de compras y flujo económico.</p>
+            <div class="about-container-map">
+                <div>
+                    <h3 class="font-size-high">Análisis de Mercado y Socios</h3>
+                    <p>Visualización de densidad de compras y flujo económico.</p>
+                </div>
+                <button id="btn-ver-calculos" class="hidden btn font-size-small padding-small radius-standard-small">
+                    🔢 Ver Cálculos Vectoriales
+                </button>
+            </div>
             <div class="dashboard-container">
                 <div class="map-wrapper">
                     <div id="map-analitico"></div>
                 </div>
                 <div class="table-wrapper radius-standard-small" id="tabla-socios">
                     <h4 class="font-size-normal" style="margin-top:0; border-bottom: 2px solid var(--line-color);">🏆
-                        Top Socios</h4>
+                        Top Socios <img src="../res/icon/information-button.png" id="open-math-details" alt="info"></h4>
                     <div class="table-scroll">
                         <table id="tabla-socios">
                             <thead>
@@ -70,6 +77,44 @@
                             <tbody>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+            <div id="modal-calculos" class="modal-overlay hidden">
+                <div class="modal-content radius-standard padding-standard">
+                    <div class="modal-header">
+                        <h3 class="font-size-high">🧮 Reporte Matemático Regional</h3>
+                        <button id="btn-cerrar-modal" class="btn-close">✖</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Análisis centrado en el socio principal: <strong id="math-nombre-socio">...</strong></p>
+
+                        <table class="math-table">
+                            <tr>
+                                <td><strong>Función de Densidad <span>D(x<sub>0</sub>, y<sub>0</sub>)</span></strong><br><small>Intensidad económica en
+                                        el centro</small></td>
+                                <td id="res-densidad" class="math-value">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Magnitud del Gradiente |∇D|</strong><br><small>Tasa de crecimiento
+                                        máxima</small></td>
+                                <td id="res-gradiente" class="math-value">-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Valor Promedio (Integral)</strong><br><small>Promedio de ventas en la región
+                                        (r=2.7km)</small></td>
+                                <td id="res-promedio" class="math-value">-</td>
+                            </tr>
+                        </table>
+
+                        <div class="math-explanation font-size-small">
+                            <p><strong>Interpretación:</strong></p>
+                            <p>El valor promedio se calcula mediante la integral doble sobre la región circular <i>R</i>:</p>
+                            <p style="text-align: center; font-family: 'Times New Roman', serif; font-style: italic;">
+                                f<sub>prom</sub> = (1 / Area) ∫∫<sub>R</sub> D(x,y) dA
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
