@@ -3,15 +3,6 @@ import { Auth } from './auth.js';
 Auth.protegerLogin();
 
 const indexURL = 'index.html';
-// const selectType = document.querySelector('#tipo');
-// selectType.addEventListener('change', (e) => {
-//     const empresaDetalles = document.querySelector('#empresa-detalles');
-//     if (e.target.value === 'empresa') {
-//         empresaDetalles.classList.remove('hidden');
-//     }else{
-//         empresaDetalles.classList.add('hidden');
-//     }
-// });
 /**
  * Verifica si un email existe en un archivo JSON.
  */
@@ -43,7 +34,6 @@ signupForm.addEventListener('submit', async (e) => {
     if (password !== passwordConfirm) {
         return alert('Las contraseñas no coinciden.');
     }
-
     // --- Check 1: Verificar en localStorage ---
     const localUsers = JSON.parse(localStorage.getItem('users')) || [];
     const existeLocal = localUsers.find(user => user.email === email || user.rfc === rfc);
@@ -61,7 +51,6 @@ signupForm.addEventListener('submit', async (e) => {
     if (existeEnEmpresas || existeEnCentros) {
         return alert('Este correo ya pertenece a una cuenta verificada del sistema. Por favor inicia sesión.');
     }
-
     // --- CREACIÓN DE USUARIO ---
     const newUser = { 
         name, 
@@ -72,12 +61,9 @@ signupForm.addEventListener('submit', async (e) => {
         tipo, 
         clase
     };
-
     localUsers.push(newUser);
     localStorage.setItem('users', JSON.stringify(localUsers));
-
     alert('¡Registro Exitoso!');
-    
     // Auto-login
     Auth.iniciarSesion(newUser);
     window.location.href = indexURL;

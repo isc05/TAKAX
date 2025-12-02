@@ -35,21 +35,25 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 100vw;
+    width: fit-content;
+    min-width: 100%;
     align-items: center;
     justify-content: space-around;
-    padding: 1rem;
+    padding: 1rem 0;
     background-color: var(--secondary-color);
     border-bottom: 4px solid var(--line-color);
     color: var(--background-color);
     margin-bottom: 2rem;
+    transition: all 0.3s ease;
 }
 .container-header {
     display: flex;
+    min-width: 300px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 30vw;
+    width: fit-content;
+    height: fit-content;
 }
 .container-header h2{
     font-size: 1.5rem;
@@ -86,9 +90,10 @@ body {
     border: 2px solid var(--secondary-color);
     text-align: left;
     position: absolute;
-    top: 13vh;
+    /* top: 13vh; */
     max-width: 350px;
     z-index: 10;
+    transform: translateY(63%);
 }
 .ui-profile li {
     padding: 8px 12px;

@@ -1,4 +1,5 @@
 import { Auth } from './auth.js';
+import { cargarMapa } from './map.js';
 
 // ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
@@ -89,8 +90,26 @@ async function cargarSocios() {
         console.error("Error cargando socios:", error);
     }
 }
+/* Función para llenar el panel de compras*/
+function llenarPanelCompras() {
+  if (!usuario || !usuario.historialCompras || usuario.historialCompras.length === 0) {
+    console.log("No hay compras para mostrar.");
+    return;
+  }
+  const panelCompras = document.getElementById("panel-compras");
+  const listaCompras = panelCompras.querySelector("ul");
+  listaCompras.innerHTML = ""; // Limpiar compras previas
+  usuario.historialCompras.forEach((compra, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `Compra ${index + 1}. <span><strong class="positive">$${compra.monto.toFixed(2)}</strong> <strong class="negative">(10%)</strong></span>`;
+    listaCompras.appendChild(li);
+  });
+}
 document.addEventListener("DOMContentLoaded", () => {
-  
+  cargarMapa(usuario.coordenadas.lat, usuario.coordenadas.lng, usuario.nombre);
+
+  llenarPanelCompras();
+
   const userNameText = document.getElementById("user-name-text");
   const userRoleText = document.getElementById("user-role-text");
   const userName = document.querySelectorAll(".account-name");

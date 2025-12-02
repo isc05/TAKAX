@@ -1,15 +1,12 @@
 import { Auth } from './auth.js';
 import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico, enfocarCoordenadas, calcularMetricasRegion } from './map.js';
 
-// ¡LÍNEA MÁGICA DE SEGURIDAD!
 Auth.protegerPagina();
-// RE-ASEGURAR EL CANDADO
-// Si llegué aquí es que tengo sesión iniciada, así que marco el territorio de nuevo
 const usuario = Auth.obtenerUsuarioActual();
 if (usuario) {
   Auth.bloquearUsuario(usuario.email);
 }
-//sección de prueba - login correcto
+//sección - login correcto
 const userNameText = document.getElementById("user-name-text");
 const userRoleText = document.getElementById("user-role-text");
 const userName = document.querySelector(".user-name");
@@ -20,7 +17,6 @@ if (usuario) {
   userName.innerText = `Nombre: ${usuario.name}`;
   userEmail.innerText = `Correo: ${usuario.email}`;
 }
-//console.log("Usuario actual:", usuario);
 // Lógica de la página de empresas - búsqueda y filtros de centros de reciclaje
 import { crearTarjeta } from "./tarjeta.js";
 
@@ -82,7 +78,7 @@ function aplicarFiltros() {
     const coincideRating = c.rating >= f.ratingMin;
     const coincidePrecio = c.precioMin >= f.precioMin && c.precioMax <= f.precioMax;
     const coincideMateriales = f.materiales.length === 0 || f.materiales.some(m => c.materiales.includes(m));
-    const coincideDistancia = !c.distancia || c.distancia <= f.distanciaMax; // si tienes distancia en tu JSON
+    const coincideDistancia = !c.distancia || c.distancia <= f.distanciaMax; // parámetro pendiente
     return coincideNombre && coincideRating && coincidePrecio && coincideMateriales && coincideDistancia;
   });
 
