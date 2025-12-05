@@ -24,6 +24,9 @@ export function crearTarjeta(centro) {
             centro.direccion.ciudad + ", " +
             centro.direccion.estado + "," +
             centro.direccion.pais +".";
+        if (centro.distanciaCalculada && centro.distanciaCalculada !== Infinity) {
+            clone.querySelector(".distancia").textContent = `A ${centro.distanciaCalculada.toFixed(2)} km. de tí`;
+        }
     } else {
         // Handle cases where centro.direccion is undefined or null
         // For example, set an empty string or a default message

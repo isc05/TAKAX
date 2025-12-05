@@ -7,10 +7,14 @@
         "pais": "México", 
         "estado": "Puebla", 
         "ciudad": "Atlixco", 
-        "colonia": "Centro historico",
-        "calle": "5 de mayo",
-        "numero": "123",
+        "colonia": "Centro",
+        "calle": "2 Ote.",
+        "numero": "0",
         "codigoPostal": "74200"
+    },
+    "coordenadas": {
+        "lat": 18.91020328266599,
+        "lng": -98.43398367753375
     },
     "phone": "123 456 7890",
     "email": "email@example.com",
@@ -27,11 +31,15 @@
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
-        "ciudad": "Atlixco", 
-        "colonia": "Centro historico",
-        "calle": "5 de mayo",
-        "numero": "123",
-        "codigoPostal": "74200"
+        "ciudad": "San Bernardino Tlaxcalancingo", 
+        "colonia": "Lomas de Angelopolis",
+        "calle": "Blvrd Interamericano",
+        "numero": "108",
+        "codigoPostal": "72830"
+    },
+    "coordenadas": {
+        "lat": 19.000034339721655,
+        "lng": -98.27463881897177
     },
     "phone": "123 456 7890",
     "email": "alice@gmail.com",
@@ -48,11 +56,15 @@
     "direccion": {
         "pais": "México", 
         "estado": "Puebla", 
-        "ciudad": "Atlixco", 
-        "colonia": "Centro historico",
-        "calle": "5 de mayo",
-        "numero": "123",
-        "codigoPostal": "74200"
+        "ciudad": "Heróica Puebla de Zaragoza", 
+        "colonia": "San Felipe Hueyotlipan",
+        "calle": "Aquiles Serdán Sur",
+        "numero": "26",
+        "codigoPostal": "72030"
+    },
+    "coordenadas": {
+        "lat": 19.08604960807466,
+        "lng": -98.21414486414825
     },
     "phone": "123 456 7890",
     "email": "oxxo@email.com",

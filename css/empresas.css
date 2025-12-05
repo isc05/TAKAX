@@ -339,6 +339,10 @@
     margin-bottom: 1rem;
     height: max-content;
 }
+.tarjeta .encabezado.secundario {
+    align-items: center;
+    margin-bottom: 0;
+}
 .tarjeta .encabezado .sub-encabezado #recomendado {
     background-color: var(--highlighter-color);
     color: var(--background-color);
@@ -354,11 +358,12 @@
 
 .tarjeta .encabezado .sub-encabezado.right {
     text-align: right;
+    max-width: 50%;
 }
 
 .tarjeta .encabezado .sub-encabezado.left {
     text-align: left;
-    width: 60%;
+    max-width: 50%;
 }
 .tarjeta .estado {
     color: var(--background-color);

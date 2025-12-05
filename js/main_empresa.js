@@ -1,5 +1,6 @@
 import { Auth } from './auth.js';
 import { cargarMapa, redimensionarMapa, inicializarMapaAnalitico, enfocarCoordenadas, calcularMetricasRegion } from './map.js';
+import { crearTarjeta } from "./tarjeta.js";
 
 Auth.protegerPagina();
 const usuario = Auth.obtenerUsuarioActual();
@@ -18,13 +19,21 @@ if (usuario) {
   userEmail.innerText = `Correo: ${usuario.email}`;
 }
 // Lógica de la página de empresas - búsqueda y filtros de centros de reciclaje
-import { crearTarjeta } from "./tarjeta.js";
-
 let centros = [];
 
 async function cargarDatos() {
   const res = await fetch("../json/centros.json");
   centros = await res.json();
+  // Calculamos la distancia de cada centro al usuario
+  centros = centros.map(c => {
+    let distancia = Infinity; // Por defecto muy lejos
+    // Si ambos tienen coordenadas, calculamos
+    if (usuario.coordenadas && c.coordenadas) {
+      distancia = calcularDistanciaKm(usuario.coordenadas, c.coordenadas);
+    }
+    // Retornamos el centro + su distancia calculada
+    return { ...c, distanciaCalculada: distancia };
+  });
   mostrarResultados(centros);
 }
 
@@ -42,7 +51,10 @@ function mostrarResultados(lista) {
     if (critRecomendado !== 0) {
       return critRecomendado;
     }
-
+    // Si la distancia es válida en ambos, ordenamos por km
+    if (a.distanciaCalculada !== Infinity && b.distanciaCalculada !== Infinity) {
+      return a.distanciaCalculada - b.distanciaCalculada;
+    }
     // Criterio 2: Si son iguales en "recomendado" (critRecomendado es 0),
     // entonces ordenamos por 'rating' de mayor a menor.
     return b.rating - a.rating;
@@ -56,7 +68,24 @@ function mostrarResultados(lista) {
     contenedor.innerHTML = "<p>No se encontraron centros de reciclaje.</p>";
   }
 }
+// ==========================================
+// 1. FUNCIÓN MATEMÁTICA DE DISTANCIA (Euclidiana Local)
+// ==========================================
+function calcularDistanciaKm(coord1, coord2) {
+  if (!coord1 || !coord2) return Infinity; // Si faltan datos, está infinitamente lejos
 
+  // Factores de conversión (Los mismos que usamos en el mapa para consistencia)
+  // 1 grado Lat ~= 111.19 km
+  // 1 grado Lng ~= 111.19 * cos(lat) km
+  const factorLatKm = 111.19;
+  const factorLngKm = 111.19 * Math.cos(coord1.lat * (Math.PI / 180));
+
+  const dx = (coord2.lng - coord1.lng) * factorLngKm;
+  const dy = (coord2.lat - coord1.lat) * factorLatKm;
+
+  // Teorema de Pitágoras: c = raíz(a² + b²)
+  return Math.sqrt(dx * dx + dy * dy);
+}
 function obtenerFiltros() {
   console.log("Obteniendo filtros...");
   const nombre = document.getElementById("busqueda-nombre").value.toLowerCase();
@@ -78,10 +107,10 @@ function aplicarFiltros() {
     const coincideRating = c.rating >= f.ratingMin;
     const coincidePrecio = c.precioMin >= f.precioMin && c.precioMax <= f.precioMax;
     const coincideMateriales = f.materiales.length === 0 || f.materiales.some(m => c.materiales.includes(m));
-    const coincideDistancia = !c.distancia || c.distancia <= f.distanciaMax; // parámetro pendiente
+    const maxDist = f.distanciaMax > 0 ? f.distanciaMax : Infinity;
+    const coincideDistancia = c.distanciaCalculada <= maxDist;
     return coincideNombre && coincideRating && coincidePrecio && coincideMateriales && coincideDistancia;
   });
-
   mostrarResultados(filtrados);
 }
 
@@ -183,7 +212,7 @@ async function calcularDatosMapa() {
     });
 
     console.log("Datos analiticos:", datosAnaliticos);
-    inicializarMapaAnalitico(datosAnaliticos);
+    inicializarMapaAnalitico(datosAnaliticos, usuarioActual);
 
     renderizarTablaTopSocios(datosAnaliticos);
 
@@ -338,37 +367,37 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // LÓGICA DEL MODAL MATEMÁTICO
-    const btnVerCalculos = document.getElementById("btn-ver-calculos");
-    const modal = document.getElementById("modal-calculos");
-    const btnCerrarModal = document.getElementById("btn-cerrar-modal");
+  const btnVerCalculos = document.getElementById("btn-ver-calculos");
+  const modal = document.getElementById("modal-calculos");
+  const btnCerrarModal = document.getElementById("btn-cerrar-modal");
 
-    btnVerCalculos.addEventListener("click", () => {
-        if (datosCacheados && socioTopCacheado) {
-            // 1. Ejecutar las Matemáticas Pesadas
-            const resultados = calcularMetricasRegion(datosCacheados, socioTopCacheado);
+  btnVerCalculos.addEventListener("click", () => {
+    if (datosCacheados && socioTopCacheado) {
+      // 1. Ejecutar las Matemáticas Pesadas
+      const resultados = calcularMetricasRegion(datosCacheados, socioTopCacheado);
 
-            // 2. Llenar el HTML del Modal
-            document.getElementById("math-nombre-socio").textContent = socioTopCacheado.nombre;
+      // 2. Llenar el HTML del Modal
+      document.getElementById("math-nombre-socio").textContent = socioTopCacheado.nombre;
 
-            // Formateo de números para que se vean científicos pero legibles
-            document.getElementById("res-densidad").textContent = resultados.densidad.toFixed(2);
-            document.getElementById("res-gradiente").textContent = resultados.gradiente.magnitud.toFixed(2);
-            document.getElementById("res-promedio").textContent = `$ ${resultados.promedio.toFixed(2)}`;
+      // Formateo de números para que se vean científicos pero legibles
+      document.getElementById("res-densidad").textContent = resultados.densidad.toFixed(2);
+      document.getElementById("res-gradiente").textContent = resultados.gradiente.magnitud.toFixed(2);
+      document.getElementById("res-promedio").textContent = `$ ${resultados.promedio.toFixed(2)}`;
 
-            // 3. Mostrar Modal
-            modal.classList.remove("hidden");
-        }
-    });
+      // 3. Mostrar Modal
+      modal.classList.remove("hidden");
+    }
+  });
 
-    // Cerrar Modal
-    btnCerrarModal.addEventListener("click", () => {
-        modal.classList.add("hidden");
-    });
+  // Cerrar Modal
+  btnCerrarModal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
 
-    // Cerrar si clic afuera
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.add("hidden");
-    });
+  // Cerrar si clic afuera
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.classList.add("hidden");
+  });
 
   backBtn.addEventListener("click", () => {
     detallesArea.classList.add("hidden");
