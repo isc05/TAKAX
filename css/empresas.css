@@ -343,6 +343,11 @@
     align-items: center;
     margin-bottom: 0;
 }
+.tarjeta .encabezado .sub-encabezado{
+    max-width: 50%;
+    min-width: 50%;
+    overflow-wrap: break-word;
+}
 .tarjeta .encabezado .sub-encabezado #recomendado {
     background-color: var(--highlighter-color);
     color: var(--background-color);
@@ -357,13 +362,11 @@
 }
 
 .tarjeta .encabezado .sub-encabezado.right {
-    text-align: right;
-    max-width: 50%;
+    text-align: right;  
 }
 
 .tarjeta .encabezado .sub-encabezado.left {
     text-align: left;
-    max-width: 50%;
 }
 .tarjeta .estado {
     color: var(--background-color);
