@@ -140,7 +140,7 @@ function poblarDetalles(centro) {
     cargarMapa(
       centro.coordenadas.lat,
       centro.coordenadas.lng,
-      `<b>${centro.nombre}</b><br>${centro.direccion.calle}, ${centro.direccion.numero}`
+      `<b>📍${centro.nombre}</b><br>${centro.direccion.calle}, ${centro.direccion.numero}`
     );
   } else {
     console.warn("Este centro no tiene coordenadas GPS.");

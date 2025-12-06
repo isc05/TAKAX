@@ -106,7 +106,7 @@ function llenarPanelCompras() {
   });
 }
 document.addEventListener("DOMContentLoaded", () => {
-  cargarMapa(usuario.coordenadas.lat, usuario.coordenadas.lng, usuario.nombre);
+  cargarMapa(usuario.coordenadas.lat, usuario.coordenadas.lng, `<b>📍${usuario.nombre}</b><br>${usuario.direccion.calle}, ${usuario.direccion.numero}`);
 
   llenarPanelCompras();
 

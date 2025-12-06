@@ -193,3 +193,17 @@ body {
 .negative {
     color: red;
 }
+/* Clases para el index.html (pantalla de carga)*/
+.load{
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+.load img{
+    max-width: 20vw;
+    height: auto;
+}
