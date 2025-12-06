@@ -48,15 +48,18 @@ body {
 }
 .container-header {
     display: flex;
-    min-width: 300px;
+    min-width: 30%;
+    max-width: 30%;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    text-align: center;
     width: fit-content;
     height: fit-content;
 }
 .container-header h2{
-    font-size: 1.5rem;
+    font-size: clamp(0.5rem, calc(0.7vw + 1rem), 1.5rem);
 }
 .container-header h2, .container-header img{
     cursor: pointer;
@@ -95,6 +98,12 @@ body {
     z-index: 10;
     transform: translateY(63%);
 }
+@media (max-width: 700px){
+    .ui-profile{
+        right: 1vw;
+    }
+}
+
 .ui-profile li {
     padding: 8px 12px;
     border-bottom: 1px solid var(--secondary-color);

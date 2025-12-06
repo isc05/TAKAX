@@ -16,7 +16,7 @@
 }
 .panel-mapa .about-container-map{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     gap: 1rem;;
@@ -27,8 +27,8 @@
     text-align: center;
 }
 .panel-mapa .about-container-map div{
-    flex: 2 1 300px;
-    min-width: 300px;
+    flex: 1 2 2 100px;
+    min-width: fit-content;
     display: flex;
     flex-direction: column;
 }
@@ -129,24 +129,13 @@
 /* Estilos para el botón de ocultar mapa*/
 #view-map{
     display: flex;
-    position: absolute;
-    align-self: flex-start;
-    top: 20vh;
     align-items: center;
     width: max-content;
     z-index: 15;
 }
-@media (max-width: 768px){
-    #view-map{
-        top: 50vh;
-    }
+@media (max-width: 510px){
     #view-map span{
         display: none;
-    }
-}
-@media (max-width: 500px){
-    #view-map{
-        top: 60vh;
     }
 }
 #view-map:hover{
@@ -252,9 +241,14 @@
     /*top: 25vh;*/
     transform: translateX(-50%);
 }
-@media (max-width: 768px){
+@media (max-width: 810px){
     .panel-filtros {
         transform: translateX(0%);
+    }
+}
+@media (max-width: 450px){
+    .panel-filtros {
+        width: 95%;
     }
 }
 .campo label,
@@ -439,21 +433,28 @@
 .detalles-area .container.in-left .sub-container-double h3{
     width: 50%; 
 }
-@media (max-width: 768px){
-    .detalles-area .container{
-        width: 100%;
-        max-width: 400px;
-    }
-    .detalles-area .container.in-left .sub-container-double h3{
-        width: 100%;
-        max-width: 400px; 
-    }
-}
 .sub-container-double{
     display: flex;
     justify-content: space-between;
     text-align: center;
 }
+@media (max-width: 768px){
+    .detalles-area{
+        margin: 0.3rem;
+    }
+    .detalles-area .container{
+        width: 100%;
+        max-width: 500px;
+    }
+    .detalles-area .container.in-left .sub-container-double h3{
+        width: 100%;
+        max-width: 500px; 
+    }
+    .sub-container-double{
+    flex-direction: column;
+}
+}
+
 .detalles-area .container.in-right #recomendado-det{
     width: 80%;
     text-align: center;
@@ -472,7 +473,7 @@
 }
 #img-centro-container {
     display: flex;
-    width: 70%;
+    width: 90%;
     height: 200px;
     background-size: cover;
     background-position: center;
