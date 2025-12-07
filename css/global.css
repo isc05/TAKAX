@@ -13,10 +13,12 @@ html {
     --line-color: #093FB4;
     --line-color-2:#9d09b4;
     --line-color-3:#d73321;
+    --soft-line-color-3:#f3b4ad;
     /*dark blue alternative #0a0b45*/
     --background-color: #E0F4FF;
     --button-color: #E5446D;
     --highlighter-color: #FF7832;
+    --soft-highlighter-color:#ffdac8;
     --font:Arial, sans-serif;
     --transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1)
 }

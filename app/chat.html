@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +11,13 @@
     <script type="module" src="close_window.js"></script>
     <title>Chat</title>
 </head>
+
 <body>
     <section id="panel-chat" class="radius-standard">
         <section id="header-chat">
             <div id="back"></div>
             <h1>Chat</h1>
-            <button id="clear-chat-btn" class="btn font-size-small radius-standard-small">
+            <button id="clear-chat-btn" class="btn font-size-small radius-standard-small padding-small">
                 Limpiar Chat
             </button>
         </section>
@@ -23,20 +25,55 @@
             <div id="chat" class="padding-standard">
             </div>
             <div id="actions">
-                <textarea name="mensaje" id="mensaje" class="radius-standard font-size-normal"
-                    placeholder="Escribe un mensaje..."></textarea>
-                <input type="submit" value="Enviar" class="btn font-size-normal padding-standard radius-standard-small">
+                <div class="row msg">
+                    <textarea name="mensaje" id="mensaje" class="radius-standard font-size-normal"
+                        placeholder="Escribe un mensaje..."></textarea>
+                    <input type="submit" value="Enviar"
+                        class="btn font-size-normal padding-standard-special radius-standard-small">
+                </div>
+                <div class="row extras">
+                    <label for="deal-mode">
+                        <input type="checkbox" name="deal-mode" id="deal-mode">
+                        <img src="../res/icon/deal.png" alt="deal" class="deal-icon">
+                    </label>
+                    <label for="price" class="invisible" id="price-zone">
+                        <strong>$</strong><input type="number" name="deal-mode" id="price"
+                            class="radius-standard-small padding-small">MXN.
+                    </label>
+                </div>
             </div>
         </section>
     </section>
 
     <template id="mensaje-template">
-        <div class="mensaje-area">
-            <span class="nombre-usuario font-weight-bold"></span>
-            <div class="mensaje-chat radius-standard-small padding-standard font-size-normal">
-                <span class="contenido-mensaje"></span>
+    <div class="mensaje-area">
+        <span class="nombre-usuario"></span>
+        
+        <div class="mensaje-chat radius-standard-small padding-standard font-size-normal">
+            <span class="contenido-mensaje"></span>
+            
+            <div class="deal-mode-details-msg hidden">
+                
+                <div class="deal-info">
+                    <div>
+                        <img src="../res/icon/deal.png" alt="deal" class="deal-icon msg">
+                        <strong class="price-of-deal font-size-high"></strong>
+                    </div>
+                    <strong class="deal-status-label font-size-small"></strong>
+                </div>
+
+                <div class="deal-actions-receiver hidden">
+                    <button class="aceptar-deal btn radius-standard-small padding-small">Aceptar</button>
+                    <button class="rechazar-deal btn radius-standard-small padding-small">Rechazar</button>
+                </div>
+
+                <div class="deal-actions-sender right hidden">
+                    <button class="cancelar-deal btn radius-standard-small padding-small">Cancelar Trato</button>
+                </div>
             </div>
         </div>
-    </template>
+    </div>
+</template>
 </body>
+
 </html>
