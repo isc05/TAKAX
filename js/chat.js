@@ -32,6 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const priceZone = document.getElementById("price-zone");
     const priceInput = document.getElementById("price");
 
+    //backbutton
+    const back = document.getElementById("back");
+    back.addEventListener("click", ()=>{
+        window.history.back();
+    });
+    
     // Inicializar chat vacío si no existe
     if (!localStorage.getItem(CHAT_STORAGE_KEY)) {
         localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify([]));
